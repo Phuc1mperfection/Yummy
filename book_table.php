@@ -62,6 +62,6 @@
         </div>
 
       </div>
-    </section><!-- End Book A Table Section -->
+    </section><!-- End Book A Table Sectifon -->
 </body>
 </html>
