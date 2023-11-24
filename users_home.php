@@ -24,22 +24,27 @@ if (!isset($_SESSION['tendangnhap'])) {
     <style>
 body {
     font-family: Poppins, sans-serif;
-        display: flex;
+    display: flex;
+    margin: 0;
+    background-color: #4d4855;
+    background-image: linear-gradient(147deg, #4d4855 0%, #000000 74%);
+
+
 }
+
 .sidebar {
     width: 200px;
     height: 100vh;
-    background-color: #000000;
+    background-color: #e0455f;
+    background-image: linear-gradient(147deg, #e0455f 0%, #44000b 74%);
     color: #fff;
     padding: 20px;
     overflow: auto;
     margin-top: 90px;
     position: fixed;
 }
-
 .sidebar h2 {
     text-align: center;
-    color: #f9a825;
     margin-bottom: 20px;
 }
 
@@ -50,18 +55,24 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color  0.3s ease;
 }
 
 .sidebar a:hover {
-    background-color: palevioletred;
+    background-color: #210d10;
 }
 
 .admin-panel {
-    margin-left: 240px; 
+    margin-left: 205px; 
     padding: 10px;
     margin-top: 90px;
     width: 100%;
+    overflow: auto;
+    position: fixed;
+    display: block;
+    background-color: #e0455f;
+
+
 }
     </style>
     </head>

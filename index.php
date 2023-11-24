@@ -1,4 +1,30 @@
 <?php include 'header.php';?>
+<?php
+require_once("connection.php");
+
+// Đếm số lượng thành viên
+$sql = "SELECT COUNT(*) as count FROM thanhvien";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$countMembers = $row['count'];
+
+// Đếm số lượng admin
+$sqlAdmin = "SELECT COUNT(*) as count FROM `admin`";
+$stmt = $conn->prepare($sqlAdmin);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$countAdmins = $row['count'];
+
+$stmt->close();
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +68,7 @@
         </div>
       </div>
     </div>
-  </section><!-- End Hero Section -->
+  </section>
 
   <main id="main">
 
@@ -87,7 +113,7 @@
     </section><!-- End About Section -->
 
     <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us section-bg">
+    <!-- <section id="why-us" class="why-us section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="row gy-4">
@@ -103,7 +129,7 @@
                 <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
               </div>
             </div>
-          </div><!-- End Why Box -->
+          </div>
 
           <div class="col-lg-8 d-flex align-items-center">
             <div class="row gy-4">
@@ -114,15 +140,14 @@
                   <h4>Corporis voluptates officia eiusmod</h4>
                   <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
                 </div>
-              </div><!-- End Icon Box -->
-
+              </div>
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
                   <i class="bi bi-gem"></i>
                   <h4>Ullamco laboris ladore pan</h4>
                   <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
                 </div>
-              </div><!-- End Icon Box -->
+              </div>
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
@@ -130,7 +155,7 @@
                   <h4>Labore consequatur incidid dolore</h4>
                   <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
                 </div>
-              </div><!-- End Icon Box -->
+              </div>
 
             </div>
           </div>
@@ -138,7 +163,7 @@
         </div>
 
       </div>
-    </section><!-- End Why Us Section -->
+    </section> -->
 
     <!-- ======= Stats Counter Section ======= -->
     <section id="stats-counter" class="stats-counter">
@@ -148,51 +173,51 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Clients</p>
+            <span data-purecounter-start="0" data-purecounter-end="<?php echo $countMembers; ?>" data-purecounter-duration="1" class="purecounter"></span>          
+              <p>Thành viên</p>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
+              <p>Món ăn</p>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hours Of Support</p>
+              <p>Đơn đặt hàng</p>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Workers</p>
+              <p>Admin</p>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
 
         </div>
 
       </div>
-    </section><!-- End Stats Counter Section -->
+    </section>
 
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Our Menu</h2>
-          <p>Check Our <span>Yummy Menu</span></p>
+          <h2>Menu của nhà hàng </h2>
+          <p>Menu đa dạng <span>Món ăn</span></p>
         </div>
 
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
           <li class="nav-item">
             <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-              <h4>Starters</h4>
+              <h4>Khai vị</h4>
             </a>
           </li><!-- End tab nav item -->
 
@@ -221,7 +246,7 @@
 
             <div class="tab-header text-center">
               <p>Menu</p>
-              <h3>Starters</h3>
+              <h3>Khai vị</h3>
             </div>
 
             <div class="row gy-5">

@@ -31,12 +31,15 @@ if (!isset($_SESSION['tendangnhap'])) {
     <style>
 body {
     font-family: Poppins, sans-serif;
-        display: flex;
+    display: flex;
+    background-color: #dee4ea;
+    margin: 0;
 }
+
 .sidebar {
     width: 200px;
     height: 100vh;
-    background-color: #c62828;
+    background-color: #7b403b;
     color: #fff;
     padding: 20px;
     overflow: auto;
@@ -61,33 +64,40 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #f9a825;
+    background-color: #210d10;
 }
 
 .admin-panel {
-    margin-left: 240px; 
+    margin-left: 205px; 
     padding: 10px;
     margin-top: 90px;
     width: 100%;
+    display: block;
+    overflow: auto;
+    position: fixed;
+background-image: linear-gradient(326deg, #861657 0%, #7b403b 74%);
+    color: #fff;
 }
     </style>
 </head>
 <body>
     <div class="sidebar">
-    <a href="admin_home.php?page=admin_users">Quản lý Thành Viên</a>
-            <a href="admin_posts.php">Manage Posts</a>
-        <a href="admin_comments.php">Manage Comments</a>
+    <a href="admin_home.php?page=admin_users">Quản lý Thành viên</a>
+    <a href="admin_home.php?page=admin_comments">Quản lý Góp ý</a>
+    <a href="admin_book_table.php">Quản lý Đặt bàn</a>
+    <a href="admin_blogs.php">Quản lý Blog</a>
+    <a href="admin_foods.php">Quản lý Món ăn</a>
+    <a href="admin_categories.php">Quản lý Danh mục</a>
+    <a href="admin_orders.php">Quản lý Đơn hàng</a>
     </div>
 
     <div class="admin-panel">
     <?php
-    if (isset($_GET['page'])) {
-        $page = $_GET['page'];
-        if ($page == 'admin_users') {
-            include 'admin_users.php';
-        }
-    }
-    ?>
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+    include($page . ".php");
+}
+?>
 </div>
 </body>
 </html>
