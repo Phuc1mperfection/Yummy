@@ -68,7 +68,7 @@ body {
     margin-left: 240px; 
     padding: 10px;
     margin-top: 90px;
-    padding-top: 100px;
+    width: 100%;
 }
     </style>
 </head>
