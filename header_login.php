@@ -14,9 +14,9 @@
         <h1>Yummy<span>.</span></h1>
       </a>
 
-      <nav id="navbar" class="navbar" >
+      <nav id="navbar" class="navbar">
         <ul>
-            <li>Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
+            <li><a href="#">Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
             <li><a href="logout.php">Đăng xuất</a></li>
         
         </ul>
@@ -25,5 +25,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>
   </header>
+  <div id="preloader"></div>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
