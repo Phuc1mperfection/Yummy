@@ -67,17 +67,27 @@ body {
 .admin-panel {
     margin-left: 240px; 
     padding: 10px;
+    margin-top: 90px;
+    padding-top: 100px;
 }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <a href="admin_users.php">Quản lý Thành Viên</a>
-        <a href="admin_posts.php">Manage Posts</a>
+    <a href="admin_home.php?page=admin_users">Quản lý Thành Viên</a>
+            <a href="admin_posts.php">Manage Posts</a>
         <a href="admin_comments.php">Manage Comments</a>
     </div>
 
     <div class="admin-panel">
-    </div>
+    <?php
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+        if ($page == 'admin_users') {
+            include 'admin_users.php';
+        }
+    }
+    ?>
+</div>
 </body>
 </html>
