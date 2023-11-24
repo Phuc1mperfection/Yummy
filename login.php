@@ -4,6 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tendangnhap = $_POST['TenDangNhap']; 
     $matkhau = $_POST['MatKhau'];
 
+    // First, check the admin table
     $sql = "SELECT * FROM admin WHERE TenDangNhap = ? AND MatKhau = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $tendangnhap, $matkhau);
@@ -15,9 +16,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['tendangnhap'] = $tendangnhap;
         header('Location: admin_home.php');
         exit(); 
-    }  else {
-		$_SESSION['Error'] = "Sai tên đăng nhập hoặc mật khẩu";
-	}
+    } else {
+        // If not found in admin table, check the thanhvien table
+        $sql = "SELECT * FROM thanhvien WHERE TenDangNhap = ? AND MatKhau = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $tendangnhap, $matkhau);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            session_start();
+            $_SESSION['tendangnhap'] = $tendangnhap;
+            header('Location: users_home.php');
+            exit(); 
+        } else {
+            session_start();
+            $_SESSION['Error'] = "Sai tên đăng nhập hoặc mật khẩu";
+        }
+    }
 
     $stmt->close();
     $conn->close();

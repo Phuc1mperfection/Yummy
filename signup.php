@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else {
         $_SESSION['Error'] = "Đăng ký không thành công. Vui lòng thử lại.";
-        echo "Error: " . $sql . "<br>" . $conn->error; // Print SQL error if any
+        echo "Error: " . $sql . "<br>" . $conn->error; 
     }
     $stmt->close();
 }
@@ -47,15 +47,15 @@ $conn->close();
 </head>
 <body style="background-color: #666666;">
 <?php
-if (isset($_SESSION['Error'])) {
-    echo '<p class="error">' . $_SESSION['Error'] . '</p>';
-    unset($_SESSION['Error']);
+if (isset($_SESSION['Success'])) {
+    echo "<div class='alert alert-success'>" . $_SESSION['Success'] . "</div>";
+    unset($_SESSION['Success']);
 }
 ?>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title p-b-43">
 						Đăng ký 
 					</span>
@@ -77,7 +77,7 @@ if (isset($_SESSION['Error'])) {
 						<span class="label-input100">Họ Tên</span>
 
 					</div><div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="TenDangNhap">
+						<input class="input100" type="text" name="DiaChi">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Địa chỉ</span>
 					</div>				

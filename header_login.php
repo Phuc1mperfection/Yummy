@@ -14,14 +14,13 @@
         <h1>Yummy<span>.</span></h1>
       </a>
 
-      <nav id="navbar" class="navbar">
+      <nav id="navbar" class="navbar" >
         <ul>
-            <li><a href="#">Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
+            <li>Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
             <li><a href="logout.php">Đăng xuất</a></li>
         
         </ul>
       </nav>
-      <a class="btn-book-a-table" href="#book-a-table">Đặt bàn</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>
