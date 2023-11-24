@@ -25,7 +25,6 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>
   </header>
-  <div id="preloader"></div>
-  <script src="assets/js/main.js"></script>
+
 </body>
 </html>

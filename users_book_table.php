@@ -19,13 +19,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/css/main.css" rel="stylesheet">
-
+    <link href="assets/css/main.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -73,18 +67,11 @@ $conn->close();
                 <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
                 <div class="validate"></div>
               </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Book a Table</button></div>
+           
+              <div class="text-center" style="padding-top: 10px;"><button type="submit">Ấn đặt thôi</button></div>
             </form>
-          </div><!-- End Reservation Form -->
-
+          </div>
         </div>
-
       </div>
-    </section><!-- End Book A Table Sectifon -->
-</body>
+    </section>
 </html>
