@@ -19,7 +19,9 @@ if (!isset($_SESSION['tendangnhap'])) {
 
 <html>
 <head>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Admin Home</title>
     <style>
 body {
@@ -81,6 +83,7 @@ body {
         <a href="users_home.php?page=users_book_table">Đặt bàn</a>
         <a href="users_home.php?page=users_posts">Viết blog</a>
         <a href="users_home.php?page=users_comments">Gửi lời yêu thương</a>
+        <a href="users_home.php?page=users_comments"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
     </div>
 
     <div class="admin-panel">

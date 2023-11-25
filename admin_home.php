@@ -93,11 +93,11 @@ background-image: linear-gradient(326deg, #861657 0%, #7b403b 74%);
 
     <div class="admin-panel">
     <?php
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-    include($page . ".php");
-}
-?>
-</div>
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+        include($page . ".php");
+    }
+    ?>
+    </div>
 </body>
 </html>
