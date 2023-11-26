@@ -84,11 +84,11 @@ background-image: linear-gradient(326deg, #861657 0%, #7b403b 74%);
     <div class="sidebar">
     <a href="admin_home.php?page=admin_users">Quản lý Thành viên</a>
     <a href="admin_home.php?page=admin_comments">Quản lý Góp ý</a>
-    <a href="admin_book_table.php">Quản lý Đặt bàn</a>
-    <a href="admin_blogs.php">Quản lý Blog</a>
-    <a href="admin_foods.php">Quản lý Món ăn</a>
-    <a href="admin_categories.php">Quản lý Danh mục</a>
-    <a href="admin_orders.php">Quản lý Đơn hàng</a>
+    <a href="admin_home.php?admin_book_table.php">Quản lý Đặt bàn</a>
+    <a href="admin_home.php?admin_blogs.php">Quản lý Blog</a>
+    <a href="admin_home.php?admin_foods.php">Quản lý Món ăn</a>
+    <a href="admin_home.php?admin_categories.php">Quản lý Danh mục</a>
+    <a href="admin_home.php?admin_orders.php">Quản lý Đơn hàng</a>
     </div>
 
     <div class="admin-panel">

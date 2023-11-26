@@ -83,7 +83,7 @@ body {
         <a href="users_home.php?page=users_book_table">Đặt bàn</a>
         <a href="users_home.php?page=users_posts">Viết blog</a>
         <a href="users_home.php?page=users_comments">Gửi lời yêu thương</a>
-        <a href="users_home.php?page=users_comments"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
+        <a href="users_home.php?page=users_cart"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
     </div>
 
     <div class="admin-panel">
