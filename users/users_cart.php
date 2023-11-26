@@ -1,5 +1,5 @@
 <?php 
-require_once("connection.php");
+require_once("../components/connection.php");
 $sql="select a.*,b.TenDanhMuc from MonAn a,DanhMuc b where a.MaDanhMuc=b.MaDanhMuc order by MaMonAn asc";
 $result=$conn->query($sql) or die($conn->error);
 if (!empty($_GET["action"])){
@@ -48,7 +48,7 @@ if (!empty($_GET["action"])){
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link href="assets/css/cart.css" rel="stylesheet">
+		<link href="../assets/css/cart.css" rel="stylesheet">
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	<title>0200366_66PM5_NguyenHongPhuc</title>
@@ -89,7 +89,7 @@ if (!empty($_GET["action"])){
                 $item_price = $item["pquantity"]*$item["Gia"];
     ?>
                 <tr valign=middle>
-                <td><img width=50px src="assets/img/menu/<?php echo $item['Anh']; ?>" class="cart_item-image"><?php echo $item['TenMonAn']; ?></td>        
+                <td><img width=50px src="../assets/img/menu/<?php echo $item['Anh']; ?>" class="cart_item-image"><?php echo $item['TenMonAn']; ?></td>        
                     <td><?php echo $item["MaMonAn"];?></td>
                     <td><?php echo $item["pquantity"];?></td>
                     <td><?php echo $item["Gia"];?>$</td>
@@ -115,7 +115,7 @@ if (!empty($_GET["action"])){
     ?>      
         <div class=product-item>
             <form method=POST action="?action=add&MaMonAn=<?php echo $r["MaMonAn"];?>">
-            <div class="product-image"><img src="assets/img/menu/<?php echo $r['Anh']; ?>" width="250px" height="250px"></div>                <div class="product-tile-footer">
+            <div class="product-image"><img src="../assets/img/menu/<?php echo $r['Anh']; ?>" width="250px" height="250px"></div>                <div class="product-tile-footer">
                     <div class="product-title"><?php echo $r["MaMonAn"]."-".$r["TenMonAn"];?></div>
                     <div class="product-price"><?php echo number_format($r["Gia"]);?> VND</div>
                     <div class="cart-action">

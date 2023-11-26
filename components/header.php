@@ -39,8 +39,8 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a href="login.php">Đăng nhập</a></li>
-          <li><a href="signup.php">Đăng ký</a></li>
+          <li><a href="auth/login.php">Đăng nhập</a></li>
+          <li><a href="auth/signup.php">Đăng ký</a></li>
         </ul>
       </nav>
       <a class="btn-book-a-table" href="#book-a-table">Đặt bàn</a>

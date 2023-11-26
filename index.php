@@ -1,6 +1,6 @@
-<?php include 'header.php';?>
+<?php include 'components/header.php'?>
 <?php
-require_once("connection.php");
+require_once("components/connection.php");
 
 // Đếm số lượng thành viên
 $sql = "SELECT COUNT(*) as count FROM thanhvien";
@@ -797,7 +797,7 @@ $conn->close();
 
         </div>
     </section>
-    <?php include 'footer.php';?>
+    <?php include 'components/footer.php'?>
   </main>
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>

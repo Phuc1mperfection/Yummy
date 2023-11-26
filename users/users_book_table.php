@@ -1,8 +1,6 @@
 <?php
-require_once("connection.php");
-
+require_once("../components/connection.php");
 $tendangnhap = $_SESSION['tendangnhap'];
-
 $sql = "SELECT * FROM thanhvien WHERE TenDangNhap = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $tendangnhap);
@@ -19,7 +17,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -33,7 +31,7 @@ $conn->close();
 
         <div class="row g-0">
 
-          <div class="col-lg-4 reservation-img" style="background-image: url(assets/img/reservation.jpg);" data-aos="zoom-out" data-aos-delay="200"></div>
+          <div class="col-lg-4 reservation-img" style="background-image: url(../assets/img/reservation.jpg);" data-aos="zoom-out" data-aos-delay="200"></div>
 
           <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
             <form action="forms/book_table_action.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">

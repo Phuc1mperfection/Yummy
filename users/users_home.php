@@ -1,21 +1,21 @@
 <?php
 session_start();
-require_once("connection.php");
+require_once("../components/connection.php");
 if (!isset($_SESSION['tendangnhap'])) {
     header('Location: login.php');
     exit();
 }
 ?>
-<?php include 'header_login.php';?>
+<?php include '../components/header_login.php';?>
 
 <!DOCTYPE html>
 
-<link href="assets/img/favicon.png" rel="icon">
-<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/css/main.css" rel="stylesheet">
+<link href="../assets/img/favicon.png" rel="icon">
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../assets/css/main.css" rel="stylesheet">
 
 <html>
 <head>
@@ -73,15 +73,13 @@ body {
     position: fixed;
     display: block;
     background-color: #e0455f;
-
-
 }
     </style>
     </head>
 <body>
     <div class="sidebar">
         <a href="users_home.php?page=users_book_table">Đặt bàn</a>
-        <a href="users_home.php?page=users_posts">Viết blog</a>
+        <a href="users_home.php?page=users_blog">Viết blog</a>
         <a href="users_home.php?page=users_comments">Gửi lời yêu thương</a>
         <a href="users_home.php?page=users_cart"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
     </div>

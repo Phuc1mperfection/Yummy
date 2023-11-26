@@ -1,6 +1,5 @@
 <?php
-require_once("connection.php");
-
+require_once("../components/connection.php");
 if (!isset($_GET["MaThanhVien"]) || !isset($_GET["action"])) {
     die("No user ID or action provided");
 }

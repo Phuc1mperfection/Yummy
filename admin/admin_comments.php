@@ -1,6 +1,5 @@
 <?php
-require_once("connection.php");
-
+require_once("../components/connection.php");
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $sql = "DELETE FROM gopy WHERE MaGopY = ?";

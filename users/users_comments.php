@@ -1,10 +1,7 @@
 <?php
-
-require_once("connection.php");
-
+require_once("../components/connection.php");
 $tendangnhap = $_SESSION['tendangnhap'];
 
-// Lấy MaThanhVien từ tên đăng nhập
 $sql = "SELECT * FROM thanhvien WHERE TenDangNhap = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $tendangnhap);
@@ -16,7 +13,6 @@ if ($thanhvien) {
     $mathanhvien = $thanhvien['MaThanhVien'];
     $stmt->close();
 
-    // Thêm góp ý vào cơ sở dữ liệu
     if (isset($_POST['chude']) && isset($_POST['noidung'])) {
         $chude = $_POST['chude'];
         $noidung = $_POST['noidung'];

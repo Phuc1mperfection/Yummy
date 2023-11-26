@@ -1,5 +1,5 @@
 <?php
-require_once("connection.php");
+require_once("../components/connection.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tendangnhap = $_POST['TenDangNhap']; 
     $matkhau = $_POST['MatKhau'];
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
         session_start();
         $_SESSION['tendangnhap'] = $tendangnhap;
-        header('Location: admin_home.php');
+		header('Location: ../admin/admin_home.php');
         exit(); 
     } else {
         // If not found in admin table, check the thanhvien table
@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows > 0) {
             session_start();
             $_SESSION['tendangnhap'] = $tendangnhap;
-            header('Location: users_home.php');
-            exit(); 
+		header('Location: ../users/users_home.php');
+        exit(); 
         } else {
             session_start();
             $_SESSION['Error'] = "Sai tên đăng nhập hoặc mật khẩu";

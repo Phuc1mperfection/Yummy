@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("connection.php");
+require_once("../components/connection.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $tendangNhap = $_POST['TenDangNhap'];
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         $_SESSION['Success'] = "Đăng ký thành công";
-        header('Location: index.php'); 
+        header('Location: ../index.php'); 
         exit();
     } else {
         $_SESSION['Error'] = "Đăng ký không thành công. Vui lòng thử lại.";

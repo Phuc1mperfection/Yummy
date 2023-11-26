@@ -17,7 +17,7 @@
       <nav id="navbar" class="navbar">
         <ul>
             <li><a href="#">Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
-            <li><a href="logout.php">Đăng xuất</a></li>
+            <li><a href="../auth/logout.php">Đăng xuất</a></li>
         
         </ul>
       </nav>
