@@ -42,9 +42,7 @@ if (!empty($_GET["action"])){
             break;
     }
 }
-
 ?>
-
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -62,20 +60,18 @@ if (!empty($_GET["action"])){
 	color: rgb(0, 208, 17);
 	float: left;
 	text-decoration: none;
-	border-radius: 3px;
-	margin: 10px 0px;
+	border-radius: 9px;
+	margin: 10px 0px 10px 20px;
 	padding-right : 10px;
 }
 		</style>
 		<div id="shopping-cart">
 			<h2><div class="txt-heading">Giỏ hàng</div></h2>
-			<a id="btnEmpty" href=?action=empty>Empty Cart</a>
-			<a id="btnCheckout" href="checkout.php">Xác nhận</a>
 			<?php 
 				$total_quantity = 0;
 				$total_price = 0;
 			?>
-			<table>
+			<table style="width:60%;">
     <tr>
         <th>Tên món</th>
         <th>Mã món ăn</th>
@@ -93,7 +89,7 @@ if (!empty($_GET["action"])){
                     <td><?php echo $item["MaMonAn"];?></td>
                     <td><?php echo $item["pquantity"];?></td>
                     <td><?php echo $item["Gia"];?>$</td>
-                    <td><a href="?action=remove&MaMonAn=<?php echo $item["MaMonAn"];?>" class="remove-item"><i class='fas fa-times fa-2x' style ='color:red; align = center;'></i></a></td>
+                    <td><a href="../users/users_home.php?page=users_cart&action=remove&MaMonAn=<?php echo $item["MaMonAn"];?>" class="remove-item"><i class='fas fa-times fa-2x' style ='color:red; align = center;'></i></a></td>
                 </tr>
     <?php 
                 $total_quantity +=$item["pquantity"];
@@ -107,28 +103,33 @@ if (!empty($_GET["action"])){
         <td colspan=2><strong><?php echo number_format($total_price,2)." VND";?></strong></td>
     </tr>
 </table>
-</div>
-<div id="product-grid">
-    <div class="txt-heading">Products</div>
-    <?php if ($result->num_rows>0){
-        while ($r = $result->fetch_assoc()){
-    ?>      
+        </div>
+        <div id="product-grid">
+            <a id="btnEmpty" href=../users/users_home.php?page=users_cart&action=empty>Empty Cart</a>
+            <a id="btnCheckout" href="checkout.php">Xác nhận</a>
+        </div>
+<br>
+        <div id="product-grid">
+        <div class="txt-heading">Products</div>
+        <?php if ($result->num_rows>0){
+            while ($r = $result->fetch_assoc()){
+        ?>      
         <div class=product-item>
-            <form method=POST action="?action=add&MaMonAn=<?php echo $r["MaMonAn"];?>">
-            <div class="product-image"><img src="../assets/img/menu/<?php echo $r['Anh']; ?>" width="250px" height="250px"></div>                <div class="product-tile-footer">
-                    <div class="product-title"><?php echo $r["MaMonAn"]."-".$r["TenMonAn"];?></div>
-                    <div class="product-price"><?php echo number_format($r["Gia"]);?> VND</div>
-                    <div class="cart-action">
-                        <input type=text class="product-quantity" name=quantity value=1 size=2>
-                        <input type=submit value="Add to Cart" class="btnAddAction">
-							</div>
-						</div>
-					</form>
-				</div>
-			<?php
-				}
-			}
-			?>
+        <form method="POST" action="../users/users_home.php?page=users_cart&action=add&MaMonAn=<?php echo $r['MaMonAn']; ?>">            <div class="product-image"><img src="../assets/img/menu/<?php echo $r['Anh']; ?>" width="250px" height="250px"></div>          
+                <div class="product-tile-footer">
+                <div class="product-title"><?php echo $r["MaMonAn"]."-".$r["TenMonAn"];?></div>
+                <div class="product-price"><?php echo number_format($r["Gia"]);?> VND</div>
+                <div class="cart-action">
+                    <input type=text class="product-quantity" name=quantity value=1 size=2>
+                    <input type=submit value="Add to Cart" class="btnAddAction">
+                </div>
+            </div>
+                </form>
+        </div>
+            <?php
+                }
+            }
+            ?>
 		</div>
 	</body>
 </html>
