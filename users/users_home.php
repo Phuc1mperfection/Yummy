@@ -69,11 +69,12 @@ body {
     padding: 10px;
     margin-top: 90px;
     width: 100%;
-    overflow: auto;
+    height: 90%; /* Set a specific height */
+    overflow-y: auto; /* Show vertical scrollbar when the content overflows */
     position: fixed;
-    display: block;
-    background-color: #e0455f;
+    background-color: #e0455f;  
 }
+
     </style>
     </head>
 <body>
