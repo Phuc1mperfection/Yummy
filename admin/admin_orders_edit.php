@@ -17,11 +17,10 @@ if (!isset($_SESSION["order_edit_error"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-<h1 align=center>Cập nhập order</h1>
+<h1 align=center>Cập nhật order</h1>
 		<br>
 		<center><font color=red><?php echo $_SESSION["order_edit_error"];?></font></center>
         <form method=POST action="admin_orders_edit_action.php?madh=<?php echo $madh; ?>">

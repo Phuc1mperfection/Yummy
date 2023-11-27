@@ -27,8 +27,7 @@ if(!isset( $_SESSION["order_error"]))
         border-radius: 5px;
         font-size: 16px;
         font-weight: bold;
-    ">
-        Thêm một blog mới
+    ">Thêm một đơn hàng mới
     </a></center>
     <?php
     if ($result->num_rows > 0) {
