@@ -1,13 +1,13 @@
 <?php
     session_start();
-    require_once ("connection.php");
+	require_once("../components/connection.php");
 	$matv=$_POST["txtMaThanhVien"];
 	$thoigiandathang=$_POST["txtThoiGianDatHang"];
 	$thoigianthanhtoan = $_POST["txtThoiGianThanhToan"];
     $diachi = $_POST["taDiaChiNhanHang"];
 
 	
-	$sql = "insert into dondathang(MaThanhVien,ThoiGianDatHang,ThoiGianThanhToan,DiaChiNhanHang) values ('$matv','$thoigiandathang','$thoigianthanhtoan','$diachi')";
+	$sql = "insert into donhang(MaThanhVien,ThoiGianDatHang,ThoiGianThanhToan,DiaChiNhanHang) values ('$matv','$thoigiandathang','$thoigianthanhtoan','$diachi')";
      
         
         $conn->query($sql) or die($conn->error);

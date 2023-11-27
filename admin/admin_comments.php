@@ -30,7 +30,7 @@ $conn->close();
     <title>Document</title>
 </head>
 <body>
-<h1>Admin Comments</h1>
+<h2>Admin Comments</h2>
 
 <table width = 100%>
     <thead align="center">

@@ -1,14 +1,12 @@
 <?php
-require_once("connection.php");
+require_once("../components/connection.php");
 if (!isset($_SESSION["order_edit_error"])){
     $_SESSION["order_edit_error"]="";
 }
-
-
-
 	$madh = $_GET["madh"];
-
-	$sql = "SELECT * FROM dondathang where MaDonHang=$madh";
+	$sql = "SELECT * FROM donhang 
+	JOIN thanhvien ON donhang.MaThanhVien = thanhvien.MaThanhVien 
+	WHERE MaDonHang = $madh";
 	$result = $conn->query($sql);
 
 	$row = $result->fetch_assoc();
@@ -36,19 +34,12 @@ if (!isset($_SESSION["order_edit_error"])){
 				<tr>
 					<td>Thời gian đặt hàng:</td>
                     <td><input type=datetime-local  style="width:220px" value="<?php echo $row["ThoiGianDatHang"];?>" name=txtThoiGianDatHang></td>
-
-					
 				</tr>
 
                 <tr>
 					<td>Thời gian thanh toán:</td>
                     <td><input type=datetime-local  style="width:220px" value="<?php echo $row["ThoiGianThanhToan"];?>" name=txtThoiGianThanhToan></td>
-
-					
 				</tr>
-	
-				
-
 				<tr>
 					<td>Địa chỉ nhận hàng:</td>
 					<td><textarea cols=20 style="width:220px" rows=6 name=taDiaChiNhanHang value= ><?php echo $row["DiaChiNhanHang"];?></textarea></td>

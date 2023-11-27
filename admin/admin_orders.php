@@ -1,6 +1,6 @@
 <?php
-require_once("connection.php");
-$sql = "SELECT * from dondathang";
+require_once("../components/connection.php");
+$sql = "SELECT * from donhang";
 $result = $conn->query($sql);
 
 if(!isset( $_SESSION["order_error"]))
@@ -17,8 +17,19 @@ if(!isset( $_SESSION["order_error"]))
 </head>
 
 <body>
-    <h1 align=center>Danh sách order trong hệ thống</h1>
-    <center><a href="admin_orders_add.php"><p>Thêm một đơn hàng mới</p></a></center>
+    <h1>Đơn hàng </h1>
+    <center><a href="admin_home.php?page=admin_blogs_add" style="
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        background-color: #4CAF50;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    ">
+        Thêm một blog mới
+    </a></center>
     <?php
     if ($result->num_rows > 0) {
         ?>
@@ -39,10 +50,7 @@ if(!isset( $_SESSION["order_error"]))
             <td><?php echo $row["ThoiGianDatHang"]; ?></td>
             <td><?php echo $row["ThoiGianThanhToan"]; ?></td>
             <td><?php echo $row["DiaChiNhanHang"]; ?></td>
-            
-            
-
-            <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_orders_edit.php?madh=<?php echo $row['MaDonHang']; ?>'">Cập nhật</button> </td>
+            <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_home.php?page=admin_orders_edit&madh=<?php echo $row['MaDonHang']; ?>'">Cập nhật</button> </td>
             <td><button type="button" class="btn btn-danger" onclick="if(confirm('Are you sure?')) window.location.href='admin_orders_delete.php?madh=<?php echo $row['MaDonHang']; ?>'">Xóa</button>            </td>
         </tr>
         <?php endwhile; ?>
@@ -56,3 +64,9 @@ $conn->close();
 ?>
 </body>
 </html>
+<?php
+    $_SESSION["order_error"]="";
+    $_SESSION["order_add_error"]=" ";
+    $_SESSION["order_edit_error"]=" ";
+    $_SESSION["order_delete_error"]=" ";
+?>

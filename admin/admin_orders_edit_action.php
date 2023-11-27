@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require_once("connection.php"); //kết nối CSDL
+	require_once("../components/connection.php");
     $madh = $_GET["madh"];
 	$matv=$_POST["txtMaThanhVien"];
 	$thoigiandathang=$_POST["txtThoiGianDatHang"];

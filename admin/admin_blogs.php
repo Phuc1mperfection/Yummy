@@ -20,7 +20,7 @@ if(!isset( $_SESSION["blogs_error"]))
 <?php
 if ($result->num_rows > 0) {
 ?>
-    <h1 align=center>Danh sách Blogs trong hệ thống</h1>
+    <h1> Blogs </h1>
     <center>
     <a href="admin_home.php?page=admin_blogs_add" style="
         display: inline-block;
@@ -52,7 +52,7 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["ThoiGianDang"]; ?></td>
             <td><?php echo $row["ChuDe"]; ?></td>
             <td><?php echo $row["NoiDung"]; ?></td>
-            <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_blogs_edit.php?mablog=<?php echo $row['MaBlog']; ?>'">Cập nhật</button> </td>
+            <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_home.php?page=admin_blogs_edit&mablog=<?php echo $row['MaBlog']; ?>'">Cập nhật</button> </td>
             <td><button type="button" class="btn btn-danger" onclick="if(confirm('Bạn chắc chưa?')) window.location.href='admin_blogs_delete.php?MaBlog=<?php echo $row['MaBlog']; ?>'">Xóa</button>            </td>
         </tr>
         <?php endwhile; ?>

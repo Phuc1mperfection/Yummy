@@ -1,8 +1,8 @@
 <?php
 	session_start();
-	require_once("connection.php"); //kết nối CSDL
+	require_once("../components/connection.php");
 	$madh = $_GET["madh"];
-	$sql = "delete from dondathang where MaDonHang = $madh";
+	$sql = "delete from donhang where MaDonHang = $madh";
 	$conn->query($sql) or die($conn->error);
 	if ($conn->error==""){
 		$_SESSION["order_error"]="Delete successful!";
