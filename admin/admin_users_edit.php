@@ -49,7 +49,7 @@ if ($action == "delete") {
     <title>Document</title>
 </head>
 <body>
-<form  method="POST" class="form-horizontal">  
+<form  method="POST" class="form-horizontal" >  
       <div class="form-group">
         <label for="tendangnhap" class="col-sm-2 control-label">Tên đăng nhập:</label>
         <div class="col-sm-10">
