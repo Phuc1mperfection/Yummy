@@ -72,9 +72,9 @@ body {
     margin-left: 205px; 
     padding: 10px;
     margin-top: 90px;
-    width: 90%;
-    display: block;
-    overflow: auto;
+    width: 100%;
+    height: 90%; /* Set a specific height */
+    overflow-y: auto; /* Show vertical scrollbar when the content overflows */
     position: fixed;
 background-image: linear-gradient(326deg, #861657 0%, #7b403b 74%);
     color: #fff;
