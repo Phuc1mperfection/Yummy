@@ -20,8 +20,18 @@ $row = $result->fetch_assoc();
 
 $countAdmins = $row['count'];
 
+
+
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
+
+// Thực hiện truy vấn
+$sqlmonan = "SELECT * FROM monan";
+$sql1 = "SELECT * FROM danhmuc";
+$result = $conn->query($sqlmonan);
 $stmt->close();
-$conn->close();
 ?>
 
 
@@ -203,7 +213,66 @@ $conn->close();
 
       </div>
     </section>
+ <section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>Menu của nhà hàng </h2>
+            <p>Menu đa dạng <span>Món ăn</span></p>
+        </div>
 
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <?php
+            
+            $sql1 = "SELECT * FROM danhmuc";
+            $result1 = $conn->query($sql1) or die($conn->error);
+            while ($row1 = $result1->fetch_assoc()) {
+                $categoryId = $row1["MaDanhMuc"];
+                $categoryName = $row1["TenDanhMuc"];
+                echo '<li class="nav-item">';
+                echo '<a class="nav-link" data-bs-toggle="tab" onclick="showCategory(' . $categoryId . ')">';
+                echo '<h4>' . $categoryName . '</h4>';
+                echo '</a>';
+                echo '</li>';
+            }
+            ?>
+        </ul><br>
+
+        <?php
+        $result1->data_seek(0); // Reset the result set pointer
+
+        while ($row1 = $result1->fetch_assoc()) {
+            $categoryId = $row1["MaDanhMuc"];
+
+            $sqlMonAn = "SELECT * FROM monan WHERE MaDanhMuc = $categoryId";
+            $resultMonAn = $conn->query($sqlMonAn);
+
+            echo '<div class="tab-content" id="menu-' . $categoryId . '" data-aos="fade-up" data-aos-delay="300">';
+            echo '<div class="row gy-5">';
+
+            while ($rowMonAn = $resultMonAn->fetch_assoc()) {
+                echo '<div class="col-lg-4 menu-item">';
+                echo '<a href="/assets/img/menu/' . $rowMonAn['Anh'] . '" class="glightbox"><img style="width: 400px; height: 300px;" src="assets/img/menu/' . $rowMonAn['Anh'] . '" class="menu-img img-fluid" alt=""></a>';
+                echo '<h4>' . $rowMonAn['TenMonAn'] . '</h4>';
+                echo '<p class="ingredients">' . $rowMonAn['ThongTinMonAn'] . '</p>';
+                echo '<p class="price">' . $rowMonAn['Gia'] . ' VND</p>';
+                echo '</div><!-- Menu Item -->';
+            }
+
+            echo '</div><!-- End row -->';
+            echo '</div><!-- End tab-content -->';
+        }
+        ?>
+    </div>
+</section>
+
+<script>
+    function showCategory(categoryId) {
+        document.querySelectorAll('.tab-content').forEach(function (category) {
+            category.style.display = 'none';
+        });
+        document.getElementById('menu-' + categoryId).style.display = 'block';
+    }
+</script>
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu">
       <div class="container" data-aos="fade-up">
@@ -810,3 +879,6 @@ $conn->close();
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+<?php
+$conn->close();
+?>
