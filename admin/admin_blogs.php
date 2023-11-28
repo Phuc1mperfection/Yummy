@@ -31,10 +31,8 @@ if ($result->num_rows > 0) {
         border-radius: 5px;
         font-size: 16px;
         font-weight: bold;
-    ">
-        Thêm một blog mới
-    </a>
-</center>	<center><font color=aqua><?php echo $_SESSION["blogs_error"];?></font></center>
+    ">Thêm một blog mới</a></center>	
+<center><font color=aqua><?php echo $_SESSION["blogs_error"];?></font></center>
     <table width = 85%>
         <tr>
             <th>Mã Blog</th>
@@ -53,7 +51,8 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["ChuDe"]; ?></td>
             <td><?php echo $row["NoiDung"]; ?></td>
             <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_home.php?page=admin_blogs_edit&mablog=<?php echo $row['MaBlog']; ?>'">Cập nhật</button> </td>
-            <td><button type="button" class="btn btn-danger" onclick="if(confirm('Bạn chắc chưa?')) window.location.href='admin_blogs_delete.php?MaBlog=<?php echo $row['MaBlog']; ?>'">Xóa</button>            </td>
+            <td><button type="button" class="btn btn-danger" onclick="if(confirm('Bạn chắc chưa?')) window.location.href='admin_blogs_delete.php?MaBlog=<?php echo $row['MaBlog']; ?>'">Xóa</button>     
+            </td>
         </tr>
         <?php endwhile; ?>
     </table>
