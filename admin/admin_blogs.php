@@ -1,8 +1,7 @@
 <?php
 require_once("../components/connection.php");
-$sql = "SELECT * from blog";
+$sql = "SELECT blog.*, loaiblog.TenLoaiBlog FROM blog JOIN loaiblog ON blog.MaLoaiBlog = loaiblog.MaLoaiBlog";
 $result = $conn->query($sql);
-
 if(!isset( $_SESSION["blogs_error"]))
 {
     $_SESSION["blogs_error"]="";
@@ -38,7 +37,7 @@ if ($result->num_rows > 0) {
             <th>Mã Blog</th>
             <th>Tên Blog</th>
             <th>Thời gian đăng</th>
-            <th>Chủ đề</th>
+            <th width = 10%>Loại(Chủ đề)</th>
             <th>Nội dung</th>
             <th>Cập nhật</th>
             <th>Xóa</th>
@@ -48,7 +47,7 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["MaBlog"]; ?></td>
             <td><?php echo $row["TenBlog"]; ?></td>
             <td><?php echo $row["ThoiGianDang"]; ?></td>
-            <td><?php echo $row["ChuDe"]; ?></td>
+            <td><?php echo $row["TenLoaiBlog"]; ?></td>
             <td><?php echo $row["NoiDung"]; ?></td>
             <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_home.php?page=admin_blogs_edit&mablog=<?php echo $row['MaBlog']; ?>'">Cập nhật</button> </td>
             <td><button type="button" class="btn btn-danger" onclick="if(confirm('Bạn chắc chưa?')) window.location.href='admin_blogs_delete.php?MaBlog=<?php echo $row['MaBlog']; ?>'">Xóa</button>     
