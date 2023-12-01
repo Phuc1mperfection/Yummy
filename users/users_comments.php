@@ -40,9 +40,8 @@ $conn->close();
     <title>Document</title>
 </head>
 <body>
-<section id="contact" class="contact">
-      <form  method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-    <h2>Góp ý</h2>
+<section id="contact" class="contact"  style="height: 100%;">
+<form method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100" style="padding-left: 10px; margin-top: -50px;">    <h2>Góp ý</h2>
     <div class="row">
         <div class="col-xl-6 form-group">
             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" value="<?php echo $thanhvien['HoTen']; ?>" required>
@@ -55,8 +54,8 @@ $conn->close();
         <input type="text" class="form-control" name="chude" id="chude" placeholder="Chủ đề" required>
     </div>
     <div class="form-group">
-        <textarea class="form-control" name="noidung" rows="5" placeholder="Nội dung" required></textarea>
-    </div>
+    <textarea class="form-control" name="noidung" style="height: 600px;" placeholder="Nội dung" required></textarea>
+</div>
     <div class="my-3">
         <div class="loading">Loading</div>
         <div class="error-message"></div>

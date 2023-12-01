@@ -22,7 +22,7 @@ body {
 }
 
 .txt-heading {
-	color: #fafafa;
+	color: rgb(40, 174, 207);
 	border-bottom: 1px solid #E0E0E0;
 	overflow: auto;
 }

@@ -1,4 +1,5 @@
 <?php 
+
 require_once("../components/connection.php");
 $sql="select a.*,b.TenDanhMuc from MonAn a,DanhMuc b where a.MaDanhMuc=b.MaDanhMuc order by MaMonAn asc";
 $result=$conn->query($sql) or die($conn->error);

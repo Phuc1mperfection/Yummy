@@ -1,7 +1,6 @@
-<?php include 'components/header.php'?>
 <?php
 require_once("components/connection.php");
-
+include 'components/header.php';
 // Đếm số lượng thành viên
 $sql = "SELECT COUNT(*) as count FROM thanhvien";
 $stmt = $conn->prepare($sql);
@@ -9,7 +8,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $countMembers = $row['count'];
-
 // Đếm số lượng admin
 $sqlAdmin = "SELECT COUNT(*) as count FROM `admin`";
 $stmt = $conn->prepare($sqlAdmin);
@@ -17,7 +15,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $countAdmins = $row['count'];
-
 //Đếm số lượng món ăn
 $sqlMonAn = "SELECT COUNT(*) as count FROM monan";
 $stmt = $conn->prepare($sqlMonAn);
@@ -25,35 +22,35 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $countMonAn = $row['count'];
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
-
+// Lấy danh sách blog
+$sqlBlog = "SELECT blog.*, loaiblog.TenLoaiBlog FROM blog JOIN loaiblog ON blog.MaLoaiBlog = loaiblog.MaLoaiBlog";
+$resultBlog = $conn->query($sqlBlog);
+$blogs = $resultBlog->fetch_all(MYSQLI_ASSOC);
 // Thực hiện truy vấn
 $sqlmonan = "SELECT * FROM monan";
 $sql1 = "SELECT * FROM danhmuc";
 $result = $conn->query($sqlmonan);
+
+$categoryId = isset($_GET['category']) ? $_GET['category'] : 1;
+$sql2 = "SELECT * FROM danhmuc";
+$result = $conn->query($sql2);
+
+// Fetch the menu items from the database
+$sql22 = "SELECT * FROM monan WHERE MaDanhMuc = $categoryId";
+$result2 = $conn->query($sql2);
+
 $stmt->close();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Yummy </title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>Yummy</title>
 
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
@@ -124,62 +121,7 @@ $stmt->close();
         </div>
 
       </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <!-- <section id="why-us" class="why-us section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="why-box">
-              <h3>Why Choose Yummy?</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
-              </p>
-              <div class="text-center">
-                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-8 d-flex align-items-center">
-            <div class="row gy-4">
-
-              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-clipboard-data"></i>
-                  <h4>Corporis voluptates officia eiusmod</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
-                </div>
-              </div>
-              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-gem"></i>
-                  <h4>Ullamco laboris ladore pan</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-                </div>
-              </div>
-
-              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-inboxes"></i>
-                  <h4>Labore consequatur incidid dolore</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section> -->
-
-    <!-- ======= Stats Counter Section ======= -->
+    </section>
     <section id="stats-counter" class="stats-counter">
       <div class="container" data-aos="zoom-out">
 
@@ -217,14 +159,14 @@ $stmt->close();
 
       </div>
     </section>
- <section id="menu" class="menu">
+    <section id="menu" class="menu">
     <div class="container" data-aos="fade-up">
         <div class="section-header">
             <h2>Menu của nhà hàng </h2>
             <p>Menu đa dạng <span>Món ăn</span></p>
         </div>
 
-        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <ul class="nav nav-tabs d-flex justify-content-center"  data-aos-delay="200">
             <?php
             
             $sql1 = "SELECT * FROM danhmuc";
@@ -250,20 +192,20 @@ $stmt->close();
             $sqlMonAn = "SELECT * FROM monan WHERE MaDanhMuc = $categoryId";
             $resultMonAn = $conn->query($sqlMonAn);
 
-            echo '<div class="tab-content" id="menu-' . $categoryId . '" data-aos="fade-up" data-aos-delay="300">';
+            echo '<div class="tab-content" id="menu-' . $categoryId . '" data-aos-delay="300">';
             echo '<div class="row gy-5">';
 
             while ($rowMonAn = $resultMonAn->fetch_assoc()) {
                 echo '<div class="col-lg-4 menu-item">';
-                echo '<a href="/assets/img/menu/' . $rowMonAn['Anh'] . '" class="glightbox"><img style="width: 400px; height: 300px;" src="assets/img/menu/' . $rowMonAn['Anh'] . '" class="menu-img img-fluid" alt=""></a>';
+                echo '<a href="assets/img/menu/' . $rowMonAn['Anh'] . '" class="glightbox"><img style="width: 400px; height: 300px;" src="assets/img/menu/' . $rowMonAn['Anh'] . '" class="menu-img img-fluid" alt=""></a>';
                 echo '<h4>' . $rowMonAn['TenMonAn'] . '</h4>';
                 echo '<p class="ingredients">' . $rowMonAn['ThongTinMonAn'] . '</p>';
                 echo '<p class="price">' . $rowMonAn['Gia'] . ' VND</p>';
                 echo '</div><!-- Menu Item -->';
             }
 
-            echo '</div><!-- End row -->';
-            echo '</div><!-- End tab-content -->';
+            echo '</div>';
+            echo '</div>';
         }
         ?>
     </div>
@@ -277,170 +219,12 @@ $stmt->close();
         document.getElementById('menu-' + categoryId).style.display = 'block';
     }
 </script>
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-header">
-          <h2>Testimonials</h2>
-          <p>What Are They <span>Saying About Us</span></p>
-        </div>
-
-        <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Saul Goodman</h3>
-                      <h4>Ceo &amp; Founder</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Sara Wilsson</h3>
-                      <h4>Designer</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>Jena Karlis</h3>
-                      <h4>Store Owner</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3>John Larson</h3>
-                      <h4>Entrepreneur</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
-
-    <section id="events" class="events">
-      <div class="container-fluid" data-aos="fade-up">
-
-        <div class="section-header">
-          <h2>blogs</h2>
-          <p>Share <span>Your Moments</span> In Our Restaurant</p>
-        </div>
-
-        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-1.jpg)">
-              <h3>Custom Parties</h3>
-              <div class="price align-self-start">$99</div>
-              <p class="description">
-                Quo corporis voluptas ea ad. Consectetur inventore sapiente ipsum voluptas eos omnis facere. Enim facilis veritatis id est rem repudiandae nulla expedita quas.
-              </p>
-            </div><!-- End Event item -->
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-2.jpg)">
-              <h3>Private Parties</h3>
-              <div class="price align-self-start">$289</div>
-              <p class="description">
-                In delectus sint qui et enim. Et ab repudiandae inventore quaerat doloribus. Facere nemo vero est ut dolores ea assumenda et. Delectus saepe accusamus aspernatur.
-              </p>
-            </div><!-- End Event item -->
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-3.jpg)">
-              <h3>Birthday Parties</h3>
-              <div class="price align-self-start">$499</div>
-              <p class="description">
-                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-              </p>
-            </div><!-- End Event item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Events Section -->
     <section id="gallery" class="gallery section-bg">
       <div class="container" data-aos="fade-up">
-
         <div class="section-header">
           <h2>gallery</h2>
           <p>Check <span>Our Gallery</span></p>
         </div>
-
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center">
             <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/gallery/gallery-1.jpg"><img src="assets/img/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
@@ -454,10 +238,32 @@ $stmt->close();
           </div>
           <div class="swiper-pagination"></div>
         </div>
-
       </div>
     </section>
 
+    <section id="blogs" class="blogs">
+    <div class="container-fluid" data-aos="fade-up">
+        <div class="section-header">
+            <h2>Blog</h2>
+            <p>Blog <span>được các</span> Thành viên viết</p>
+        </div>
+        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+                <?php foreach ($blogs as $blog): ?>
+                    <div class="swiper-slide blog-item d-flex flex-column justify-content-end" style="background-image: url(<?php echo $blog['AnhBlog']; ?>)">
+                    <a href="blog.php?MaBlog=<?php echo $blog['MaBlog']; ?>">
+                                        <h3><?php echo $blog['TenBlog']; ?></h3>
+                        <p class="description">
+                            <?php echo $blog['TenLoaiBlog']; ?>
+                        </p>
+                      </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
@@ -512,20 +318,13 @@ $stmt->close();
               </div>
             </div>
           </div>
-
         </div>
     </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <?php include 'components/footer.php'?>
   </main>
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/js/main.js"></script>
 </body>
 </html>
 <?php

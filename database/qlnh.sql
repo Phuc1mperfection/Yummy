@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 05:34 AM
+-- Generation Time: Nov 30, 2023 at 04:21 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -65,23 +65,21 @@ CREATE TABLE `blog` (
   `MaBlog` int(11) NOT NULL,
   `TenBlog` mediumtext NOT NULL,
   `ThoiGianDang` datetime NOT NULL,
-  `ChuDe` varchar(50) NOT NULL,
   `NoiDung` longtext NOT NULL,
-  `MaLoaiBlog` int(11) NOT NULL
+  `MaLoaiBlog` int(11) NOT NULL,
+  `AnhBlog` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
 -- Dumping data for table `blog`
 --
 
-INSERT INTO `blog` (`MaBlog`, `TenBlog`, `ThoiGianDang`, `ChuDe`, `NoiDung`, `MaLoaiBlog`) VALUES
-(2, 'Blog 2', '2023-11-26 16:30:00', 'Món', 'Nội dung blog 2.ư', 2),
-(3, 'Blog 3', '2023-11-26 18:45:00', 'Chủ đề 3', 'Nội dung blog 3.', 3),
-(4, 'CÃ´ng thá»©c náº¥u mÃ³n trá»©ng chiÃªn', '2023-11-26 09:45:43', 'N?u', 'hihi', 1),
-(5, '2', '2023-11-26 20:40:00', 'N?u', '2', 1),
-(25, 'dá', '2023-11-04 23:03:00', 'M', 'á', 0),
-(26, '', '0000-00-00 00:00:00', 'Công', '', 0),
-(27, 'test', '2023-11-03 23:12:00', 'Món', 'ád', 0);
+INSERT INTO `blog` (`MaBlog`, `TenBlog`, `ThoiGianDang`, `NoiDung`, `MaLoaiBlog`, `AnhBlog`) VALUES
+(2, 'Sắc Màu Tươi Sáng: Bí Quyết Chọn Lựa Nguyên Liệu Cho Thực Đơn Sáng Tạo', '2023-11-26 16:30:00', 'ád', 3, 'assets/img/blog/_7417815e-b753-4b6a-94e1-63be3976aa4c.jpg'),
+(3, 'Hành Trình Sáng Tạo: Thiết Kế Thực Đơn Nổi Bật với Nguyên Liệu Độc Đáo', '2023-11-26 16:30:00', 'd', 3, 'assets/img/blog/8649474.jpg'),
+(4, 'Sắc Màu Tươi Sáng: Bí Quyết Chọn Lựa Nguyên Liệu Cho Thực Đơn Sáng Tạo', '2023-11-02 16:30:00', 'sadasdas', 4, ''),
+(5, 'Góc Bếp Tinh Tế: Nguyên Liệu Đặc Sắc và Ý Tưởng Thực Đơn Độc Đáo', '2023-11-26 20:40:00', 'ádasdasd', 3, ''),
+(28, 'ádasdasdáhsfdg', '2023-11-28 20:08:00', 'àdsadf', 3, '');
 
 -- --------------------------------------------------------
 
@@ -168,8 +166,6 @@ CREATE TABLE `loaiblog` (
 --
 
 INSERT INTO `loaiblog` (`MaLoaiBlog`, `TenLoaiBlog`) VALUES
-(1, 'M'),
-(2, 'C'),
 (3, 'Món Ăn'),
 (4, 'Công Thức'),
 (5, 'Review');
@@ -196,14 +192,14 @@ CREATE TABLE `monan` (
 
 INSERT INTO `monan` (`MaMonAn`, `TenMonAn`, `Gia`, `ThongTinMonAn`, `TrangThai`, `Anh`, `MaDanhMuc`) VALUES
 (1, 'Phở gà', 45000, 'Tô phở nóng hổi với nước dùng ngọt thanh thật ấn tượng, quyện cùng bánh phở trắng nõn, thịt gà tươi ngon, săn chắc thịt và trứng non bùi bùi. ', 1, 'phoga.jpg', 3),
-(2, 'Bún riêu cua', 30000, 'Bún riêu có màu vàng cam điểm thêm màu xanh của rau, màu đỏ của ớt. Bún có hương vị thơm ngon, riêu cua béo ngậy, . ... Ngoài bún riêu cua thì bún riêu tôm là một sự cách tân trong hương vị của món bún riêu.', 1, 'bunrieu.png', 1),
+(2, 'Bún riêu', 30000, '      Bún riêu có màu vàng cam điểm thêm màu xanh của rau, màu đỏ của ớt. Bún có hương vị thơm ngon, riêu cua béo ngậy, ... Ngoài bún riêu cua thì bún riêu tôm là một sự cách tân trong hương vị của món bún riêu.', 1, 'bunrieu.png', 1),
 (3, 'Cơm gà xối mỡ', 45000, 'Cơm gà xôi mỡ ngon', 1, 'comgaxoi.jpg', 4),
 (4, 'Cơm chiên', 40000, 'Cơm chiên xào rau củ', 1, 'comchien.jpg', 4),
 (5, 'Phở bò', 60000, 'Phở bò Việt Nam', 1, 'phobo.jpg', 3),
 (6, 'Miến xào giòn', 45000, 'Miến xào giòn với rau sống', 1, 'mienxao.jpg', 2),
 (7, 'Miến gà', 55000, 'Miến gà hầm nước dùng ngon', 1, 'mienga.jpg', 2),
 (8, 'Miến trộn', 35000, 'Miến trộn với gia vị', 1, 'mientron.jpg', 2),
-(9, 'Bún ốc', 45000, 'Bún ốc sạch, ngon miệng', 1, 'bunoc.jpg', 1),
+(9, 'Bún', 45000, ' Bún ốc sạch, ngon miệng', 1, 'bunoc.png', 1),
 (10, 'Bún bò Huế', 55000, 'Bún bò Huế thơm ngon', 1, 'bunbohue.jpg', 1),
 (11, 'Cháo gà', 40000, 'Cháo gà thơm ngon và dễ tiêu hóa', 1, 'chaoga.jpg', 5),
 (12, 'Cháo cá hồi', 45000, 'Cháo cá hồi giàu omega-3', 1, 'chaocahoi.jpg', 5),
@@ -360,7 +356,7 @@ ALTER TABLE `ban`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `MaBlog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `MaBlog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `danhmuc`
@@ -390,7 +386,7 @@ ALTER TABLE `loaiblog`
 -- AUTO_INCREMENT for table `monan`
 --
 ALTER TABLE `monan`
-  MODIFY `MaMonAn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `MaMonAn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `phuongthucthanhtoan`
