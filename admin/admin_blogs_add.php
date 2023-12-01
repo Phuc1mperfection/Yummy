@@ -1,9 +1,14 @@
 <meta charset="UTF-8">
 <?php
-	if (!isset($_SESSION["blogs_add_error"]))
+	if (!isset($_SESSION["blogs_post_error"]))
 	{
-    	$_SESSION["blogs_add_error"]=" ";
+    	$_SESSION["blogs_post_error"]=" ";
 	}
+
+    if(!isset( $_SESSION["blogs_error"]))
+{
+    $_SESSION["blogs_error"]="";
+}
 
 	require_once("../components/connection.php");
     $sql = "select * from blog";
@@ -13,63 +18,72 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Tiêu đề trang web</title>
-
-
-	
 	</head>
 	<body>
-		<h1 align=center>Thêm mới một sản phẩm</h1>
-		<center><font color=red><?php echo $_SESSION["blogs_add_error"];?></font></center>
-		<form method=POST action="admin_blog_add_action.php">
-        <table border=0 align=center width=400>
+		<h1 align=center>Viết Blog</h1>
+		<center><font color=red><?php echo $_SESSION["blogs_error"];?></font></center>
+        <form action="admin_blog_add_action.php" method="post" enctype="multipart/form-data">        <table border=0 align=left width=600 >
 
 <tr>
-    <td>Tên Blog:</td>
-    <td><input style="width:220px" type=text name=txtTenBlog></td>
+    <th>Tên Blog:</th>
+    <th>Thời gian đăng:</th>
 </tr>
-<tr>
-    <td>Thời gian đăng:</td>
-    <td><input type=datetime-local  style="width:220px" value="
-    <?php
-    $ngayGioHienTai = date("Y-m-d H:i:s");
-    echo $ngayGioHienTai; 
-    ?>" name=txtThoiGianDang></td>
 
+<tr>
+<td><input style="width:1300px" type=text name=txtTenBlog></td>
     
-</tr>
-
-<tr>
-    <td>Chủ đề:</td>
     <td>
-        <select name=slChuDe>
-            <?php
-                $sql1 = "select * from loaiblog";
-                $result1 = $conn->query($sql1);
-                while($row1 = $result1->fetch_assoc())
-                {
-            ?>
-                <option value=<?php echo $row1["TenLoaiBlog"];?>><?php echo $row1["TenLoaiBlog"]; ?> </option>
-            <?php
-                }
-            ?>
-        </select>
+        <?php
+        
+        $ngayGioHienTai = date("Y-m-d\TH:i", strtotime("+6 hours")); 
+
+        ?>
+        <input type="datetime-local" style="width:220px" value="<?php echo $ngayGioHienTai; ?>" name="txtThoiGianDang" readonly>
+    </td>
+
+   
+</tr>
+<tr>
+    <th>Chủ đề:</th>
+     <td>
+     <select name="txtMaLoaiBlog">
+    <?php
+        $sql1 = "select * from loaiblog";
+        $result1 = $conn->query($sql1);
+        while($row1 = $result1->fetch_assoc())
+        {
+    ?>
+        <option value="<?php echo $row1["MaLoaiBlog"]; ?>"><?php echo $row1["TenLoaiBlog"]; ?></option>
+    <?php
+        }
+    ?>
+</select>
     </td>
 </tr>
-
 <tr>
-    <td>Nội dung:</td>
-    <td><textarea cols=20 style="width:220px" rows=6 name=taNoiDung value= ></textarea></td>
+    
+    <th>Nội dung:</th>
+</tr>
+<tr>
+    <td colspan="3">
+    <textarea cols=60 style="width:1650px" rows=6 name=taNoiDung value= ></textarea></td>
 </tr>
 
+<tr>
+			<td>Ảnh Blog:</td>
+			<td><input type="file" name="AnhBlog" accept="image/*"></td>
+		</tr>
+
 
 <tr>
-    <td align=right><input type=submit value="Thêm mới"></td>
-    <td><input type=reset value="Reset">
+    <td align=CENTER><input type=submit value="Post"> <input type=reset value="Reset"></td>
+    
 </tr>
 </table>
 		</form>
 	</body>
 </html>
 <?php 
-	$_SESSION["blogs_add_error"]="";
+	$_SESSION["blogs_post_error"]="";
+    $_SESSION["blogs_error"]="";
 ?>
