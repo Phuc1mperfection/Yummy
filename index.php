@@ -200,7 +200,7 @@ $stmt->close();
                 echo '<a href="assets/img/menu/' . $rowMonAn['Anh'] . '" class="glightbox"><img style="width: 400px; height: 300px;" src="assets/img/menu/' . $rowMonAn['Anh'] . '" class="menu-img img-fluid" alt=""></a>';
                 echo '<h4>' . $rowMonAn['TenMonAn'] . '</h4>';
                 echo '<p class="ingredients">' . $rowMonAn['ThongTinMonAn'] . '</p>';
-                echo '<p class="price">' . $rowMonAn['Gia'] . ' VND</p>';
+                echo '<p class="price">' . number_format($rowMonAn['Gia']) . ' đ</p>';
                 echo '</div><!-- Menu Item -->';
             }
 

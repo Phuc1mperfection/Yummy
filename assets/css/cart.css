@@ -22,7 +22,7 @@ body {
 }
 
 .txt-heading {
-	color: rgb(40, 174, 207);
+	color: rgb(207, 40, 40);
 	border-bottom: 1px solid #E0E0E0;
 	overflow: auto;
 }
@@ -60,13 +60,14 @@ body {
 	background: #ffffff;
 	margin: 30px 30px 0px 0px;
 	border: #E0E0E0 1px solid;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .product-image {
 	height: 155px;
 	width: 250px;
 	padding: auto;
-	margin-bottom: 40px;
+	margin-bottom: 60px;
 	background-color: #FFF;
 }
 
@@ -96,6 +97,7 @@ body {
 
 .product-price {
 	float:left;
+	margin-top: 5px;
 }
 
 .cart-action {
@@ -112,6 +114,7 @@ body {
 .product-tile-footer {
     padding: 15px 15px 0px 15px;
     overflow: auto;
+	
 }
 
 .cart-item-image {
@@ -127,4 +130,33 @@ body {
 	text-align: center;
 	clear: both;
 	margin: 38px 0px;
+}
+
+.btnAddAction:hover, #btnEmpty:hover {
+    background-color: #c95454;
+    color: #ffffff;
+}
+.btnAddAction, #btnEmpty, #btnCheckout {
+    transition: all 0.3s ease;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+ #btnCheckout:hover {
+	background-color: #00d068;
+	color: #ffffff;
+}
+
+#btnCheckout {
+	background-color: #ffffff;
+	border: #00d068 1px solid;
+	padding: 5px 10px;
+	color: rgb(0, 208, 17);
+	float: left;
+	text-decoration: none;
+	border-radius: 9px;
+	margin: 10px 0px 10px 20px;
+	padding-right : 10px;
 }

@@ -1,16 +1,18 @@
 <?php
+
+
+if(!isset($_SESSION["book_table"]))
+{
+  $_SESSION["book_table"]="";
+}
 require_once("../components/connection.php");
 $tendangnhap = $_SESSION['tendangnhap'];
-$sql = "SELECT * FROM thanhvien WHERE TenDangNhap = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $tendangnhap);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql = "SELECT * FROM thanhvien WHERE TenDangNhap like '$tendangnhap'";
+$result = $conn->query($sql);
+$rows = $result->fetch_assoc();
+$matv = $rows['MaThanhVien'];
 
-$thanhvien = $result->fetch_assoc();
 
-$stmt->close();
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,57 +21,79 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../assets/css/main.css" rel="stylesheet">
     <title>Document</title>
+
+    <script>
+    // Kiểm tra nếu URL chứa tham số 'success' (có thể điều chỉnh tùy theo cách bạn xử lý redirection)
+    if (window.location.search.includes('success')) {
+        // Hiển thị thông báo alert khi trang được tải
+        window.onload = function () {
+            alert("Đặt bàn thành công!");
+        };
+    }
+</script>
 </head>
 <body>
-<section id="book-a-table" class="book-a-table">
-      <div class="container" data-aos="fade-up">
+  <div style="margin-right:170px; color:white;">
+     <center> <h2>MỜI QUÝ KHÁCH ĐẶT BÀN</h2> </center>
+     <center> <a href="users_home.php?page=users_book_table_history"> <h5 style="color:aqua;">Lịch sử đặt bàn</h5> </a> </center>
+     <center> <font color:pink> <?php echo $_SESSION["book_table"] ?> </font></center>
+     <br>
+     <form method=POST action="users_book_table_action.php?matv=<?php echo $matv ?>">
+        <center> <h5>Loại bàn: 
+          <select name="slloaiban" id="">
+            <?php
+              $sql1 = "select * from ban";
+              $result = $conn->query($sql1);
+              while($rows = $result->fetch_assoc())
+              {
+            ?>
+              <option value="<?php echo $rows['Loaiban']; ?>"> <?php echo $rows['Loaiban']; ?> </option>
+              <?php
+              }
+              ?>
+          </select>
+        
+          &nbsp &nbsp
 
-        <div class="section-header">
-          <h2>Đặt bàn ăn</h2>
-          <p>Đặt <span>Your Bàn</span> OK?</p>
+        Thời gian hẹn đến:
+          <input type="datetime-local" name="thoigianhenden">
+          &nbsp &nbsp
+          <input type="submit" style="background-color:aqua; border:none; border-radius:10px; width:150px; height:35px;" value="Xác nhận đặt">
+            </h5> </center>
+     </form>
+
+     <br>
+     <br>
+
+     <center><h4>Danh sách các bàn ở cửa hàng chúng tôi</h4></center>
+     <table width=50% align=center border=2>
+      <tr>
+        <th>Loại bàn</th>
+        <th>Ảnh</th>
+        <th>Số lượng trống</th>
+      </tr>
+
+      <?php
+         $result = $conn->query($sql1);
+         while($rows = $result->fetch_assoc())
+         {
+      ?>
+        <tr>
+          <td> <?php echo $rows["Loaiban"]; ?> </td>
+          <td> <img src='../assets/img/bannh/<?php echo $rows["Anhban"] ?>' width=250 alt=""> </td>
+          <td> <?php echo $rows["Soluongconlai"] ?> </td>
+        </tr>
+        <?php
+         }
+        ?>
+
+        </table>
+
         </div>
-
-        <div class="row g-0">
-
-          <div class="col-lg-4 reservation-img" style="background-image: url(../assets/img/reservation.jpg);" data-aos="zoom-out" data-aos-delay="200"></div>
-
-          <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
-            <form action="forms/book_table_action.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-              <div class="row gy-4">
-                <div class="col-lg-4 col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Tên" value="<?php echo $thanhvien['HoTen']; ?>">                 
-                 <div class="validate"></div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" value="<?php echo $thanhvien['Email']; ?>"> 
-                  <div class="validate"></div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                  <input type="text" class="form-control" name="phone" id="phone" placeholder="SDT" data-rule="minlen:4"  value="<?php echo $thanhvien['SDT']; ?>">
-                  <div class="validate"></div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                  <input type="text" name="date" class="form-control" id="date" placeholder="Date" data-rule="minlen:4"  ?>
-                  <div class="validate"></div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                  <input type="text" class="form-control" name="time" id="time" placeholder="Time" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                  <div class="validate"></div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                  <input type="number" class="form-control" name="people" id="people" placeholder="# of people" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
-                  <div class="validate"></div>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
-                <div class="validate"></div>
-              </div>
-           
-              <div class="text-center" style="padding-top: 10px;"><button type="submit">Ấn đặt thôi</button></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+  
+</body>
 </html>
+
+<?php
+  unset($_SESSION["book_table"]);
+?>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once("../components/connection.php");
 $tendangnhap = $_SESSION['tendangnhap'];
 
@@ -36,11 +38,16 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <title>Document</title>
-</head>
+
+    </head>
 <body>
-<section id="contact" class="contact"  style="height: 100%;">
+<section id="contact" class="contact"  style="height: 100%; color:black; ">
 <form method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100" style="padding-left: 10px; margin-top: -50px;">    <h2>Góp ý</h2>
     <div class="row">
         <div class="col-xl-6 form-group">

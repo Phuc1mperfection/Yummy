@@ -21,7 +21,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="index.php" class="logo d-flex align-items-center me-auto me-lg-0">
+      <a href="" class="logo d-flex align-items-center me-auto me-lg-0">
 
         <h1>Yummy<span>.</span></h1>
       </a>
@@ -31,6 +31,8 @@
           <li><a href="#hero">Trang chủ</a></li>
           <li><a href="../users/users_blogs.php">Viết blog</a></li>
           <li><a href="../users/users_cart.php">Giỏ hàng</a></li>
+          <li><a href="../users/users_book_table.php">Đặt bàn</a></li>
+
           <li><a href="../users/users_comments.php">Gửi lời yêu thương</a></li>
           <li><a href="">Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
         </ul>
