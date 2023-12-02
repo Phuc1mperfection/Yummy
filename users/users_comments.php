@@ -1,36 +1,38 @@
 <?php
 session_start();
+include_once("../components/header_users.php");
 
 require_once("../components/connection.php");
 $tendangnhap = $_SESSION['tendangnhap'];
 
-$sql = "SELECT * FROM thanhvien WHERE TenDangNhap = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $tendangnhap);
-$stmt->execute();
-$result = $stmt->get_result();
-$thanhvien = $result->fetch_assoc();
+$sql = "SELECT * FROM thanhvien WHERE TenDangNhap = '$tendangnhap'";
+$result = $conn->query($sql);
 
-if ($thanhvien) {
+if ($result->num_rows > 0) {
+    $thanhvien = $result->fetch_assoc();
     $mathanhvien = $thanhvien['MaThanhVien'];
-    $stmt->close();
 
     if (isset($_POST['chude']) && isset($_POST['noidung'])) {
         $chude = $_POST['chude'];
         $noidung = $_POST['noidung'];
 
-        $sql = "INSERT INTO gopy (MaThanhVien, ChuDe, NoiDung) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iss", $mathanhvien, $chude, $noidung);
-        $stmt->execute();
-
-        $stmt->close();
+        $sql = "INSERT INTO gopy (MaThanhVien, ChuDe, NoiDung) VALUES ('$mathanhvien', '$chude', '$noidung')";
+        if ($conn->query($sql) === TRUE) {
+            $_SESSION['alert'] = "Form submitted successfully!";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
 } else {
     echo "Không tìm thấy thành viên";
 }
 
 $conn->close();
+
+if (isset($_SESSION['alert'])) {
+    echo '<div class="alert alert-success">' . $_SESSION['alert'] . '</div>';
+    unset($_SESSION['alert']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +49,17 @@ $conn->close();
 
     </head>
 <body>
+    <style>
+        a{
+            text-decoration: none;
+        }
+        body{
+            margin-top: 100px;
+            padding-left: 30px;
+            padding-right: 30px;
+
+        }
+    </style>
 <section id="contact" class="contact"  style="height: 100%; color:black; ">
 <form method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100" style="padding-left: 10px; margin-top: -50px;">    <h2>Góp ý</h2>
     <div class="row">
