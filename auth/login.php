@@ -4,25 +4,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tendangnhap = $_POST['TenDangNhap']; 
     $matkhau = $_POST['MatKhau'];
 
-    // First, check the admin table
-    $sql = "SELECT * FROM admin WHERE TenDangNhap = ? AND MatKhau = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $tendangnhap, $matkhau);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        session_start();
-        $_SESSION['tendangnhap'] = $tendangnhap;
+	$sql = "SELECT * FROM admin WHERE TenDangNhap = '$tendangnhap' AND MatKhau = '$matkhau'";
+	$result = $conn->query($sql);
+	
+	if ($result->num_rows > 0) {
+		session_start();
+		$_SESSION['tendangnhap'] = $tendangnhap;
 		header('Location: ../admin/admin_home.php');
-        exit(); 
-    } else {
-        // If not found in admin table, check the thanhvien table
-        $sql = "SELECT * FROM thanhvien WHERE TenDangNhap = ? AND MatKhau = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $tendangnhap, $matkhau);
-        $stmt->execute();
-        $result = $stmt->get_result();
+		exit(); 
+	} else {
+		$sql = "SELECT * FROM thanhvien WHERE TenDangNhap = '$tendangnhap' AND MatKhau = '$matkhau'";
+		$result = $conn->query($sql);
+	}
 
         if ($result->num_rows > 0) {
             session_start();
@@ -35,9 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    $stmt->close();
     $conn->close();
-}
 ?>
 
 <!DOCTYPE html>
