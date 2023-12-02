@@ -1,11 +1,9 @@
 
 <?php 
 session_start();
+include '../components/header_users.php';
 require_once("../components/connection.php");
-if (isset($_SESSION['success_message'])) {
-    echo $_SESSION['success_message'];
-    unset($_SESSION['success_message']);
-  }
+
 $sql="select a.*,b.TenDanhMuc from MonAn a,DanhMuc b where a.MaDanhMuc=b.MaDanhMuc order by MaMonAn asc";
 $result=$conn->query($sql) or die($conn->error);
 if (!empty($_GET["action"])){
@@ -92,23 +90,28 @@ if (!empty($_GET["action"])){
 		<meta charset="utf-8">
 		<link href="../assets/css/cart.css" rel="stylesheet">
 		<link href="../assets/css/main.css" rel="stylesheet">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	<title>0200366_66PM5_NguyenHongPhuc</title>
 	</head>
 	<body>
 		<style>
+           a {
+    text-decoration: none;
+} 
         td img.cart_item-image {
             display: block;
             float: left;
         }
 		</style>
+
 		<div id="shopping-cart">
 			<h2><div class="txt-heading">Giỏ hàng</div></h2>
 			<?php 
 				$total_quantity = 0;
 				$total_price = 0;
 			?>
+
 			<table style="width:60%;">
     <tr>
         <th>Tên món</th>
@@ -176,4 +179,5 @@ if (!empty($_GET["action"])){
             ?>
 		</div>
 	</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </html>

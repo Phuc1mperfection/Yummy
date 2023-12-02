@@ -1,34 +1,41 @@
 <?php
+session_start(); // Start the session at the top of your script
+
 require_once("../components/connection.php");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tendangnhap = $_POST['TenDangNhap']; 
     $matkhau = $_POST['MatKhau'];
 
-	$sql = "SELECT * FROM admin WHERE TenDangNhap = '$tendangnhap' AND MatKhau = '$matkhau'";
-	$result = $conn->query($sql);
-	
-	if ($result->num_rows > 0) {
-		session_start();
-		$_SESSION['tendangnhap'] = $tendangnhap;
-		header('Location: ../admin/admin_home.php');
-		exit(); 
-	} else {
-		$sql = "SELECT * FROM thanhvien WHERE TenDangNhap = '$tendangnhap' AND MatKhau = '$matkhau'";
-		$result = $conn->query($sql);
-	}
-
-        if ($result->num_rows > 0) {
-            session_start();
-            $_SESSION['tendangnhap'] = $tendangnhap;
-		header('Location: ../users/users_home.php');
+    $sql = "SELECT * FROM admin WHERE TenDangNhap = '$tendangnhap' AND MatKhau = '$matkhau'";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        $_SESSION['tendangnhap'] = $tendangnhap;
+        header('Location: ../admin/admin_home.php');
         exit(); 
-        } else {
-            session_start();
-            $_SESSION['Error'] = "Sai tên đăng nhập hoặc mật khẩu";
-        }
+    } else {
+        $sql = "SELECT * FROM thanhvien WHERE TenDangNhap = '$tendangnhap' AND MatKhau = '$matkhau'";
+        $result = $conn->query($sql);
     }
 
-    $conn->close();
+    if ($result->num_rows > 0) {
+        $_SESSION['tendangnhap'] = $tendangnhap;
+        header('Location: ../users/users_home.php');
+        exit(); 
+    } else {
+        $_SESSION['Error'] = "Sai tên đăng nhập hoặc mật khẩu";
+        header('Location: login.php');
+        exit();
+    }
+}
+
+if (isset($_SESSION['Error'])) {
+    echo '<div class="alert alert-danger">' . $_SESSION['Error'] . '</div>';
+    unset($_SESSION['Error']);
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -50,13 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <link rel="stylesheet" type="text/css" href="/Yummy/assets/css/util.css">
 <link rel="stylesheet" type="text/css" href="/Yummy/assets/css/login.css">
 </head>
-<body style="background-color: #001f3f;">
-<?php
-if (isset($_SESSION['Error'])) {
-    echo '<p class="error">' . $_SESSION['Error'] . '</p>';
-    unset($_SESSION['Error']);
-}
-?>
+<body style="background-color: #001f3f; ">
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">

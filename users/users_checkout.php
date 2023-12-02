@@ -62,7 +62,7 @@ $result = $conn->query("SELECT * FROM thanhvien WHERE tendangnhap = '" . $_SESSI
     }
 
     th, td {
-      border: 1px solid #F05941;
+      border: 1px solid #FBA1B7;
       padding: 10px;
       text-align: left;
     }
@@ -98,9 +98,10 @@ $result = $conn->query("SELECT * FROM thanhvien WHERE tendangnhap = '" . $_SESSI
             <label for="address">Địa chỉ:</label>
             <input type="text" id="DiaChi" name="DiaChi" required value="<?php echo $row["DiaChi"];?>">
         </div>
+        <div>
         <div class="form-group">
         <label for="payment">Phương thức thanh toán:</label>
-        <select id="phuongthucthanhtoan" name="phuongthucthanhtoan" required>
+        <select id="phuongthucthanhtoan" name="phuongthucthanhtoan" class="form-select" required>
             <?php
                 $stmt = $conn->prepare("SELECT * FROM phuongthucthanhtoan WHERE TrangThai = 1");
                 $stmt->execute();
@@ -111,6 +112,7 @@ $result = $conn->query("SELECT * FROM thanhvien WHERE tendangnhap = '" . $_SESSI
             ?>
     </select>
 </div>
+
 
         <tbody>
           <th>

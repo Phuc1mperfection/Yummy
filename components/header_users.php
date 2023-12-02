@@ -17,8 +17,14 @@
 
   <link href="../assets/css/main.css" rel="stylesheet">
 </head>
+
+<style>
+  .button-container {
+    display: flex;
+}
+</style>
 <body>
-<header id="header" class="header fixed-top d-flex align-items-center">
+<header id="header" class="header fixed-top d-flex align-items-center" >
     <div class="container d-flex align-items-center justify-content-between">
 
       <a href="" class="logo d-flex align-items-center me-auto me-lg-0">
@@ -28,7 +34,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#hero">Trang chủ</a></li>
+          <li><a href="../users/users_home.php">Trang chủ</a></li>
           <li><a href="../users/users_blogs.php">Viết blog</a></li>
           <li><a href="../users/users_cart.php">Giỏ hàng</a></li>
           <li><a href="../users/users_book_table.php">Đặt bàn</a></li>
