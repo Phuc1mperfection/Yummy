@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2023 at 04:21 PM
+-- Generation Time: Dec 02, 2023 at 03:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,12 +48,21 @@ INSERT INTO `admin` (`MaAdmin`, `TenDangNhap`, `MatKhau`) VALUES
 
 CREATE TABLE `ban` (
   `MaBan` int(11) NOT NULL,
-  `MaThanhVien` int(11) NOT NULL,
-  `ThoiGianDat` int(11) NOT NULL,
-  `NgayDat` varchar(20) NOT NULL,
-  `SoCho` int(20) NOT NULL,
-  `GhiChu` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+  `Loaiban` varchar(255) NOT NULL,
+  `Ghichu` text NOT NULL,
+  `Anhban` varchar(255) NOT NULL,
+  `Soluong` int(11) NOT NULL,
+  `Soluongconlai` int(11) NOT NULL,
+  `Trangthai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `ban`
+--
+
+INSERT INTO `ban` (`MaBan`, `Loaiban`, `Ghichu`, `Anhban`, `Soluong`, `Soluongconlai`, `Trangthai`) VALUES
+(1, 'Đôi', 'dành cho 2 người', 'bandoi.jpg', 4, 4, 1),
+(2, '4-6 chỗ', 'Loại bàn dành cho gia đình,...', 'bangd.jpg', 5, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -75,11 +84,24 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`MaBlog`, `TenBlog`, `ThoiGianDang`, `NoiDung`, `MaLoaiBlog`, `AnhBlog`) VALUES
-(2, 'Sắc Màu Tươi Sáng: Bí Quyết Chọn Lựa Nguyên Liệu Cho Thực Đơn Sáng Tạo', '2023-11-26 16:30:00', 'ád', 3, 'assets/img/blog/_7417815e-b753-4b6a-94e1-63be3976aa4c.jpg'),
-(3, 'Hành Trình Sáng Tạo: Thiết Kế Thực Đơn Nổi Bật với Nguyên Liệu Độc Đáo', '2023-11-26 16:30:00', 'd', 3, 'assets/img/blog/8649474.jpg'),
-(4, 'Sắc Màu Tươi Sáng: Bí Quyết Chọn Lựa Nguyên Liệu Cho Thực Đơn Sáng Tạo', '2023-11-02 16:30:00', 'sadasdas', 4, ''),
-(5, 'Góc Bếp Tinh Tế: Nguyên Liệu Đặc Sắc và Ý Tưởng Thực Đơn Độc Đáo', '2023-11-26 20:40:00', 'ádasdasd', 3, ''),
-(28, 'ádasdasdáhsfdg', '2023-11-28 20:08:00', 'àdsadf', 3, '');
+(2, 'Sắc Màu Tươi Sáng: Bí Quyết Chọn Lựa Nguyên Liệu Cho Thực Đơn Sáng Tạo', '2023-11-26 16:30:00', 'áddf', 3, 'assets/img/blog/_7417815e-b753-4b6a-94e1-63be3976aa4c.jpg'),
+(3, 'Hành Trình Sáng Tạo: Thiết Kế Thực Đơn Nổi Bật với Nguyên Liệu Độc Đáo', '2023-11-26 16:30:00', 'd', 3, 'assets/img/blog/_a1ebe242-8ab7-4c8f-a241-41477ffdab53.jpg'),
+(82, 'Sự Hấp Dẫn Của Đồ Ăn Mới: Đánh Thức Giác Quan Ăn Uống', '2023-11-30 23:27:00', 'shfggggggggggggggggggggg', 3, 'assets/img/blog/360_F_618465589_2bVIwPWelYiipGByk7tnZEgqQ3K8T56y.jpg'),
+(83, 'Những Bí Mật Của Sự Hòa Quyện: Cảm Nhận Món Ăn Truyền Thống', '2023-12-01 09:17:00', '', 3, 'assets/img/blog/4901804.jpg'),
+(84, 'Sổ Tay Nấu Ăn: Ghi Chép Các Công Thức Nấu Ăn Yêu Thích', '2023-12-01 09:19:00', 'sfedggggggggg', 3, 'assets/img/blog/_3e989f48-eb8a-474f-a4e0-41d104a14a6c.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ctdonhang`
+--
+
+CREATE TABLE `ctdonhang` (
+  `MaDonHang` int(11) NOT NULL,
+  `MaMonAn` int(11) NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `Gia` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
 
@@ -108,23 +130,42 @@ INSERT INTO `danhmuc` (`MaDanhMuc`, `TenDanhMuc`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `datban`
+--
+
+CREATE TABLE `datban` (
+  `MaDatBan` int(11) NOT NULL,
+  `MaBan` int(11) NOT NULL,
+  `MaThanhVien` int(11) NOT NULL,
+  `ThoiGianDat` datetime NOT NULL,
+  `Thoigianhenden` datetime NOT NULL,
+  `TrangThai` int(11) NOT NULL COMMENT '1.đang chờ xác nhận 2. Đã xác nhận 3. Đã hoàn thành'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `datban`
+--
+
+INSERT INTO `datban` (`MaDatBan`, `MaBan`, `MaThanhVien`, `ThoiGianDat`, `Thoigianhenden`, `TrangThai`) VALUES
+(2, 0, 1, '2023-12-12 12:10:00', '2023-12-01 06:12:39', 0),
+(3, 0, 1, '2023-12-06 12:12:00', '2023-12-01 06:13:08', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `donhang`
 --
 
 CREATE TABLE `donhang` (
   `MaDonHang` int(11) NOT NULL,
   `MaThanhVien` int(11) NOT NULL,
-  `ThoiGianDatHang` datetime NOT NULL,
-  `ThoiGianThanhToan` datetime NOT NULL,
-  `DiaChiNhanHang` varchar(255) NOT NULL
+  `MaPhuongThuc` int(11) NOT NULL,
+  `TenNguoiNhan` varchar(255) NOT NULL,
+  `DiaChiNhanHang` int(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `SDT` varchar(10) NOT NULL,
+  `TrangThai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
---
--- Dumping data for table `donhang`
---
-
-INSERT INTO `donhang` (`MaDonHang`, `MaThanhVien`, `ThoiGianDatHang`, `ThoiGianThanhToan`, `DiaChiNhanHang`) VALUES
-(2, 1, '2023-11-27 04:31:00', '2023-11-27 04:31:00', '10 Hàng Vôi');
 
 -- --------------------------------------------------------
 
@@ -182,6 +223,7 @@ CREATE TABLE `monan` (
   `Gia` decimal(10,0) NOT NULL,
   `ThongTinMonAn` longtext NOT NULL,
   `TrangThai` tinyint(1) NOT NULL,
+  `SoLuong` int(3) NOT NULL,
   `Anh` varchar(255) DEFAULT NULL,
   `MaDanhMuc` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -190,31 +232,31 @@ CREATE TABLE `monan` (
 -- Dumping data for table `monan`
 --
 
-INSERT INTO `monan` (`MaMonAn`, `TenMonAn`, `Gia`, `ThongTinMonAn`, `TrangThai`, `Anh`, `MaDanhMuc`) VALUES
-(1, 'Phở gà', 45000, 'Tô phở nóng hổi với nước dùng ngọt thanh thật ấn tượng, quyện cùng bánh phở trắng nõn, thịt gà tươi ngon, săn chắc thịt và trứng non bùi bùi. ', 1, 'phoga.jpg', 3),
-(2, 'Bún riêu', 30000, '      Bún riêu có màu vàng cam điểm thêm màu xanh của rau, màu đỏ của ớt. Bún có hương vị thơm ngon, riêu cua béo ngậy, ... Ngoài bún riêu cua thì bún riêu tôm là một sự cách tân trong hương vị của món bún riêu.', 1, 'bunrieu.png', 1),
-(3, 'Cơm gà xối mỡ', 45000, 'Cơm gà xôi mỡ ngon', 1, 'comgaxoi.jpg', 4),
-(4, 'Cơm chiên', 40000, 'Cơm chiên xào rau củ', 1, 'comchien.jpg', 4),
-(5, 'Phở bò', 60000, 'Phở bò Việt Nam', 1, 'phobo.jpg', 3),
-(6, 'Miến xào giòn', 45000, 'Miến xào giòn với rau sống', 1, 'mienxao.jpg', 2),
-(7, 'Miến gà', 55000, 'Miến gà hầm nước dùng ngon', 1, 'mienga.jpg', 2),
-(8, 'Miến trộn', 35000, 'Miến trộn với gia vị', 1, 'mientron.jpg', 2),
-(9, 'Bún', 45000, ' Bún ốc sạch, ngon miệng', 1, 'bunoc.png', 1),
-(10, 'Bún bò Huế', 55000, 'Bún bò Huế thơm ngon', 1, 'bunbohue.jpg', 1),
-(11, 'Cháo gà', 40000, 'Cháo gà thơm ngon và dễ tiêu hóa', 1, 'chaoga.jpg', 5),
-(12, 'Cháo cá hồi', 45000, 'Cháo cá hồi giàu omega-3', 1, 'chaocahoi.jpg', 5),
-(13, 'Trứng ', 8000, 'trần, luộc, ốp la', 1, 'trung.jpg', 6),
-(14, 'Nước ép cam', 25000, 'Nước ép cam tươi ngon', 1, 'nuocep_cam.jpg', 7),
-(15, 'Cà phê sữa đá', 17000, 'Cà phê sữa đá thơm ngon', 1, 'caphesuada.jpg', 7),
-(16, 'Coca-Cola', 12000, 'Cô văn ca', 1, 'coca.jpg', 7),
-(17, 'Pepsi', 13000, 'Pep thị si', 1, 'pepsi.jpg', 7),
-(18, 'Trà chanh', 9000, 'Trà chanh mát lạnh', 1, 'tra_chanh.jpg', 7),
-(19, 'Cơm tấm', 50000, 'Món cơm ngon', 0, 'comtam.jpg', 4),
-(20, 'Cháo lòng', 30000, 'Cháo Lòng ngon ', 1, 'chaolong.jpg', 5),
-(22, 'Trà đá', 5000, 'Ngon', 1, 'trada.jpg', 7),
-(23, 'Phở sốt vang', 35000, 'when i clicked to another categories it doesnt display the monan except i change the resolution', 1, 'phosotvang.jpg', 3),
-(24, 'Thêm bánh', 5000, 'Bánh phở...', 0, 'thembanh.jpg', 6),
-(25, 'Thêm thịt...', 20000, 'Thích thì mình thêm thôi', 1, 'themthit.jpg', 6);
+INSERT INTO `monan` (`MaMonAn`, `TenMonAn`, `Gia`, `ThongTinMonAn`, `TrangThai`, `SoLuong`, `Anh`, `MaDanhMuc`) VALUES
+(1, 'Phở gà', 45000, 'Tô phở nóng hổi với nước dùng ngọt thanh thật ấn tượng, quyện cùng bánh phở trắng nõn, thịt gà tươi ngon, săn chắc thịt và trứng non bùi bùi. ', 1, 46, 'phoga.jpg', 3),
+(2, 'Bún riêu', 30000, '      Bún riêu có màu vàng cam điểm thêm màu xanh của rau, màu đỏ của ớt. Bún có hương vị thơm ngon, riêu cua béo ngậy, ... Ngoài bún riêu cua thì bún riêu tôm là một sự cách tân trong hương vị của món bún riêu.', 1, 45, 'bunrieu.png', 1),
+(3, 'Cơm gà xối mỡ', 45000, 'Cơm gà xôi mỡ ngon', 1, 49, 'comgaxoi.jpg', 4),
+(4, 'Cơm chiên', 40000, 'Cơm chiên xào rau củ', 1, 3, 'comchien.jpg', 4),
+(5, 'Phở bò', 60000, 'Phở bò Việt Nam', 1, 345, 'phobo.jpg', 3),
+(6, 'Miến xào giòn', 45000, 'Miến xào giòn với rau sống', 1, 345, 'mienxao.jpg', 2),
+(7, 'Miến gà', 55000, 'Miến gà hầm nước dùng ngon', 1, 32, 'mienga.jpg', 2),
+(8, 'Miến trộn', 35000, 'Miến trộn với gia vị', 1, 123, 'mientron.jpg', 2),
+(9, 'Bún', 45000, ' Bún ốc sạch, ngon miệng', 1, 123, 'bunoc.png', 1),
+(10, 'Bún bò Huế', 55000, 'Bún bò Huế thơm ngon', 1, 12, 'bunbohue.jpg', 1),
+(11, 'Cháo gà', 40000, 'Cháo gà thơm ngon và dễ tiêu hóa', 1, 0, 'chaoga.jpg', 5),
+(12, 'Cháo cá hồi', 45000, 'Cháo cá hồi giàu omega-3', 1, 0, 'chaocahoi.jpg', 5),
+(13, 'Trứng ', 8000, 'trần, luộc, ốp la', 1, 0, 'trung.jpg', 6),
+(14, 'Nước ép cam', 25000, 'Nước ép cam tươi ngon', 1, 23, 'nuocep_cam.jpg', 7),
+(15, 'Cà phê sữa đá', 17000, 'Cà phê sữa đá thơm ngon', 1, 23, 'caphesuada.jpg', 7),
+(16, 'Coca-Cola', 12000, 'Cô văn ca', 1, 123, 'coca.jpg', 7),
+(17, 'Pepsi', 13000, 'Pep thị si', 1, 123, 'pepsi.jpg', 7),
+(18, 'Trà chanh', 9000, 'Trà chanh mát lạnh', 1, 123, 'tra_chanh.jpg', 7),
+(19, 'Cơm tấm', 50000, 'Món cơm ngon', 0, 1231, 'comtam.jpg', 4),
+(20, 'Cháo lòng', 30000, 'Cháo Lòng ngon ', 1, 234, 'chaolong.jpg', 5),
+(22, 'Trà đá', 5000, 'Ngon', 1, 2342, 'trada.jpg', 7),
+(23, 'Phở sốt vang', 35000, 'when i clicked to another categories it doesnt display the monan except i change the resolution', 1, 1231, 'phosotvang.jpg', 3),
+(24, 'Thêm bánh', 5000, 'Bánh phở...', 0, 12312, 'thembanh.jpg', 6),
+(25, 'Thêm thịt...', 20000, 'Thích thì mình thêm thôi', 1, 12312, 'themthit.jpg', 6);
 
 -- --------------------------------------------------------
 
@@ -224,9 +266,17 @@ INSERT INTO `monan` (`MaMonAn`, `TenMonAn`, `Gia`, `ThongTinMonAn`, `TrangThai`,
 
 CREATE TABLE `phuongthucthanhtoan` (
   `MaPhuongThuc` int(11) NOT NULL,
-  `TenPhuongThuc` varchar(20) NOT NULL,
+  `TenPhuongThuc` varchar(50) NOT NULL,
   `TrangThai` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `phuongthucthanhtoan`
+--
+
+INSERT INTO `phuongthucthanhtoan` (`MaPhuongThuc`, `TenPhuongThuc`, `TrangThai`) VALUES
+(4, 'Thanh toán khi nhận hàng', 1),
+(5, 'ZaloPay', 1);
 
 -- --------------------------------------------------------
 
@@ -281,8 +331,7 @@ CREATE TABLE `users` (
 -- Indexes for table `ban`
 --
 ALTER TABLE `ban`
-  ADD PRIMARY KEY (`MaBan`),
-  ADD KEY `ban-tv` (`MaThanhVien`);
+  ADD PRIMARY KEY (`MaBan`);
 
 --
 -- Indexes for table `blog`
@@ -291,17 +340,30 @@ ALTER TABLE `blog`
   ADD PRIMARY KEY (`MaBlog`);
 
 --
+-- Indexes for table `ctdonhang`
+--
+ALTER TABLE `ctdonhang`
+  ADD PRIMARY KEY (`MaDonHang`,`MaMonAn`);
+
+--
 -- Indexes for table `danhmuc`
 --
 ALTER TABLE `danhmuc`
   ADD PRIMARY KEY (`MaDanhMuc`);
 
 --
+-- Indexes for table `datban`
+--
+ALTER TABLE `datban`
+  ADD PRIMARY KEY (`MaDatBan`),
+  ADD KEY `datban-tv` (`MaThanhVien`),
+  ADD KEY `datban-ban` (`MaBan`);
+
+--
 -- Indexes for table `donhang`
 --
 ALTER TABLE `donhang`
-  ADD PRIMARY KEY (`MaDonHang`),
-  ADD KEY `donhang-tv` (`MaThanhVien`);
+  ADD PRIMARY KEY (`MaDonHang`);
 
 --
 -- Indexes for table `gopy`
@@ -350,13 +412,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ban`
 --
 ALTER TABLE `ban`
-  MODIFY `MaBan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaBan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `MaBlog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `MaBlog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `danhmuc`
@@ -365,10 +427,16 @@ ALTER TABLE `danhmuc`
   MODIFY `MaDanhMuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `datban`
+--
+ALTER TABLE `datban`
+  MODIFY `MaDatBan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `MaDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `gopy`
@@ -392,7 +460,7 @@ ALTER TABLE `monan`
 -- AUTO_INCREMENT for table `phuongthucthanhtoan`
 --
 ALTER TABLE `phuongthucthanhtoan`
-  MODIFY `MaPhuongThuc` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaPhuongThuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `thanhvien`
@@ -409,18 +477,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `ban`
---
-ALTER TABLE `ban`
-  ADD CONSTRAINT `ban-tv` FOREIGN KEY (`MaThanhVien`) REFERENCES `thanhvien` (`MaThanhVien`);
-
---
--- Constraints for table `donhang`
---
-ALTER TABLE `donhang`
-  ADD CONSTRAINT `donhang-tv` FOREIGN KEY (`MaThanhVien`) REFERENCES `thanhvien` (`MaThanhVien`);
 
 --
 -- Constraints for table `gopy`
