@@ -1,5 +1,8 @@
 <meta charset="UTF-8">
+
 <?php
+session_start();
+include_once("../components/header_users.php");
 	if (!isset($_SESSION["blogs_post_error"]))
 	{
     	$_SESSION["blogs_post_error"]=" ";
@@ -19,6 +22,16 @@
 		<meta charset="utf-8">
 		<title>Tiêu đề trang web</title>
 	</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<style>
+    a{
+        text-decoration: none;
+    }
+    body{
+        margin-top: 100px;
+        padding-left: 30px;
+    }
+</style>
 	<body>
 		<h1 align=center>Viết Blog</h1>
         <center><font color=red><?php echo isset($_SESSION["blogs_error"]) ? $_SESSION["blogs_error"] : ''; ?></font></center> 

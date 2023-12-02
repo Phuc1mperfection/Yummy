@@ -111,7 +111,7 @@ if (!empty($_GET["action"])){
 				$total_quantity = 0;
 				$total_price = 0;
 			?>
-
+<div style="display: flex; justify-content: center; margin-top:30px">
 			<table style="width:60%;">
     <tr>
         <th>Tên món</th>
@@ -142,12 +142,15 @@ if (!empty($_GET["action"])){
             }
         }
     ?>
-    <tr>
-        <td colspan=2>Total:</td>
+   <tr>
+        <td colspan="2">Total:</td>
         <td><?php echo $total_quantity?></td>
-        <td colspan=2><strong><?php echo number_format($total_price,0)." đ";?></strong></td>
+        <td colspan="2"><strong><?php echo number_format($total_price,0)." đ";?></strong></td>
+
+
     </tr>
 </table>
+</div>
         </div>
         <div id="product-grid">
             <a id="btnEmpty" href="users_cart.php?action=empty">Empty Cart</a>
