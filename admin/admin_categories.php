@@ -19,7 +19,7 @@ if ($result->num_rows > 0) {
 ?>
     <table width="100%">
         <tr>
-            <th>Mã Danh mục</th>
+            <th >Mã Danh mục</th>
             <th>Tên Danh mục</th>
             <th>Cập nhật</th>
             <th>Xóa</th>
@@ -30,13 +30,12 @@ if ($result->num_rows > 0) {
             <tr>
                 <td><?php echo $row["MaDanhMuc"]; ?></td>
                 <td><?php echo $row["TenDanhMuc"]; ?></td>
-                <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_categories_edit.php?action=edit&MaDanhMuc=<?php echo $row["MaDanhMuc"]; ?>'">Cập nhật</button></td>
+                <td><button type="button" class="btn btn-primary"  onclick="window.location.href='admin_categories_edit.php?action=edit&MaDanhMuc=<?php echo $row["MaDanhMuc"]; ?>'">Cập nhật</button></td>
                 <td><button type="button" class="btn btn-danger" onclick="if(confirm('Are you sure?')) window.location.href='admin_categories_edit.php?action=delete&MaDanhMuc=<?php echo $row["MaDanhMuc"]; ?>'">Xóa</button></td>
             </tr>
             <?php
             if ($firstRow) {
-                echo "<center><a href='admin_categories_edit.php?action=insert&MaDanhMuc={$row["MaDanhMuc"]}'>Thêm một danh mục</a></center>";
-                $firstRow = false; 
+                echo "<center><a href='admin_categories_edit.php?action=insert&MaDanhMuc={$row["MaDanhMuc"]}' style='background-color: #4CAF50;' class='btn btn-success'>Thêm một danh mục</a></center>";                $firstRow = false; 
             }
         endwhile;
         ?>

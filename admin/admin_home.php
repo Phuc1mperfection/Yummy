@@ -50,7 +50,6 @@ body {
 
 .sidebar h2 {
     text-align: center;
-    color: #f9a825;
     margin-bottom: 20px;
 }
 
@@ -72,11 +71,11 @@ body {
     margin-left: 205px; 
     padding: 10px;
     margin-top: 90px;
-    width: 100%;
-    height: 90%; /* Set a specific height */
-    overflow-y: auto; /* Show vertical scrollbar when the content overflows */
+    width: 90%;
+    height: 90%; 
+    overflow-y: auto; 
     position: fixed;
-background-image: linear-gradient(326deg, #861657 0%, #7b403b 74%);
+background-image: linear-gradient(326deg, black 0%, #7b403b 74%);
     color: #fff;
 }
     </style>

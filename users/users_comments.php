@@ -54,6 +54,12 @@ if (isset($_SESSION['alert'])) {
             text-decoration: none;
         }
         body{
+            margin: 0;
+            margin-top: 60px;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+        form{
             margin-top: 100px;
             padding-left: 30px;
             padding-right: 30px;
@@ -86,3 +92,6 @@ if (isset($_SESSION['alert'])) {
     </section>
 </body>
 </html>
+<?php
+include "../components/footer.php";
+?>

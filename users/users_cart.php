@@ -92,13 +92,13 @@ if (!empty($_GET["action"])){
 		<link href="../assets/css/main.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<title>0200366_66PM5_NguyenHongPhuc</title>
 	</head>
 	<body>
 		<style>
-           a {
-    text-decoration: none;
-} 
+        a {
+        text-decoration: none;
+        color: #af634c;
+        } 
         td img.cart_item-image {
             display: block;
             float: left;
@@ -153,8 +153,9 @@ if (!empty($_GET["action"])){
 </div>
         </div>
         <div id="product-grid">
-            <a id="btnEmpty" href="users_cart.php?action=empty">Empty Cart</a>
+            <a id="btnEmpty" href="users_cart.php?action=empty">Xóa giỏ hàng</a>
             <a id="btnCheckout" href="users_checkout.php">Xác nhận</a>
+            <a id="btnHistory" href="users_order_history.php" >Lịch sử mua hàng</a>
         </div>
 <br>
         <div id="product-grid">
@@ -168,7 +169,7 @@ if (!empty($_GET["action"])){
                <div class="product-image"><img src="../assets/img/menu/<?php echo $r['Anh']; ?>" width="250px" height="250px"></div>          
                 <div class="product-tile-footer">
                 <div class="product-title"><?php echo $r["MaMonAn"]."-".$r["TenMonAn"];?></div>
-                <p class="product-price"><?php echo number_format($r["Gia"]);?> VND</p>
+                <p class="product-price"><?php echo number_format($r["Gia"]);?>đ</p>
                 <div class="cart-action">
                     <input type=text class="product-quantity" name=SoLuong value=1 size=2>
                     <input type=submit value="Add to Cart" class="btnAddAction">

@@ -38,7 +38,7 @@ $conn->close();
             <th>HoTen</th>
             <th>ChuDe</th>
             <th>NoiDung</th>
-            <th>Action</th>
+            <th>Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -47,7 +47,7 @@ $conn->close();
                 <td><?php echo $comment['hoten']; ?></td>
                 <td><?php echo $comment['ChuDe']; ?></td>
                 <td><?php echo $comment['NoiDung']; ?></td>
-                <td><button onclick="if(confirm('Bạn chắc chưa?')) { window.location.href='admin_comments.php?delete=<?php echo $comment['MaGopY']; ?>' }" class="btn btn-danger">Delete</button></td>             </tr>
+                <td><button onclick="if(confirm('Bạn chắc chưa?')) { window.location.href='admin_comments.php?delete=<?php echo $comment['MaGopY']; ?>' }" class="btn btn-danger">Xóa</button></td>             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>

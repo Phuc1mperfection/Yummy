@@ -18,10 +18,16 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="../assets/css/main.css" rel="stylesheet">
     <title>Document</title>
 </head>
+<style>
+    a{
+        text-decoration: none;
+        }
+</style>
 <body>
-<h1 align=center>Cập nhập Blogs</h1>
+<h1 align=center>Cập nhật Blogs</h1>
 <br>
 <center><font color=red><?php echo $_SESSION["blogs_edit_error"];?></font></center>
 <form method=POST action="admin_blogs_edit_action.php?MaBlog=<?php echo $mablog; ?>">

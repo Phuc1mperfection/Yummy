@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2023 at 03:36 AM
+-- Generation Time: Dec 02, 2023 at 12:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -103,6 +103,19 @@ CREATE TABLE `ctdonhang` (
   `Gia` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Dumping data for table `ctdonhang`
+--
+
+INSERT INTO `ctdonhang` (`MaDonHang`, `MaMonAn`, `SoLuong`, `Gia`) VALUES
+(75, 1, 1, 45000),
+(75, 2, 1, 30000),
+(75, 6, 1, 45000),
+(76, 1, 1, 45000),
+(76, 2, 1, 30000),
+(76, 9, 1, 45000),
+(77, 2, 343, 10290000);
+
 -- --------------------------------------------------------
 
 --
@@ -161,11 +174,20 @@ CREATE TABLE `donhang` (
   `MaThanhVien` int(11) NOT NULL,
   `MaPhuongThuc` int(11) NOT NULL,
   `TenNguoiNhan` varchar(255) NOT NULL,
-  `DiaChiNhanHang` int(255) NOT NULL,
+  `DiaChiNhanHang` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `SDT` varchar(10) NOT NULL,
   `TrangThai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `donhang`
+--
+
+INSERT INTO `donhang` (`MaDonHang`, `MaThanhVien`, `MaPhuongThuc`, `TenNguoiNhan`, `DiaChiNhanHang`, `email`, `SDT`, `TrangThai`) VALUES
+(75, 1, 4, 'Nguyễn Hồng Phúc', '10 Hàng Vôi', 'phuc0200366@huce.edu.vn', '0123456789', 0),
+(76, 1, 4, 'Nguyễn Hồng Phúc', '10 Hàng Vôi', 'phuc0200366@huce.edu.vn', '0123456789', 0),
+(77, 1, 4, 'Nguyễn Hồng Phúc', '10 Hàng Vôi', 'phuc0200366@huce.edu.vn', '0123456789', 0);
 
 -- --------------------------------------------------------
 
@@ -188,8 +210,8 @@ INSERT INTO `gopy` (`MaGopY`, `MaThanhVien`, `ChuDe`, `NoiDung`) VALUES
 (9, 1, 'gfds', 'gdf'),
 (10, 1, 'Món ăn', 'Món ăn hôm nay nngon quá '),
 (11, 1, 'Món ăn', 'Món ăn hôm nay nngon quá '),
-(12, 1, 'ads', 'fa'),
-(13, 1, 'ituyyyyyyyyyyyyyyy', 'ytui');
+(68, 1, 'Đồ ăn 13h', 'Taste like heaven'),
+(86, 1, 'ád', 'sda');
 
 -- --------------------------------------------------------
 
@@ -424,7 +446,7 @@ ALTER TABLE `blog`
 -- AUTO_INCREMENT for table `danhmuc`
 --
 ALTER TABLE `danhmuc`
-  MODIFY `MaDanhMuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `MaDanhMuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `datban`
@@ -436,13 +458,13 @@ ALTER TABLE `datban`
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `MaDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `MaDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `gopy`
 --
 ALTER TABLE `gopy`
-  MODIFY `MaGopY` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaGopY` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `loaiblog`

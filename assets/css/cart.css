@@ -13,12 +13,23 @@ body {
 }
 
 #shopping-cart table {
-	width: 100%;
-	background-color: #F0F0F0;
+    width: 100%;
+    background-color: #F0F0F0;
+    border-collapse: collapse; 
 }
 
 #shopping-cart table td {
-	background-color: #FFFFFF;
+    background-color: #FFFFFF;
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    text-align: left;
+}
+
+#shopping-cart table th {
+    background-color: #af634c; 
+    color: white; 
+    padding: 10px;
+    text-align: left;
 }
 
 .txt-heading {
@@ -43,11 +54,11 @@ body {
     padding: 5px 10px;
     margin-left: 5px;
     background-color: #efefef;
-    border: #E0E0E0 1px solid;
-    color: #c95454;
+    border: #e007076c 1px solid;
+    color: #d00000;
     float: right;
     text-decoration: none;
-    border-radius: 3px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
@@ -91,13 +102,16 @@ body {
 
 .product-title {
 	margin-top: 20px;
-	color:rgb(170, 50, 90);
+	color:rgb(8, 1, 3);
 	font-weight:bold;
 }
 
 .product-price {
 	float:left;
 	margin-top: 5px;
+	color: #211a1a;
+	font-weight: 700;
+  	color: var(--color-primary);
 }
 
 .cart-action {
@@ -106,9 +120,10 @@ body {
 
 .product-quantity {
     padding: 5px 5px;
-    border-radius: 3px;
+    border-radius: 8px;
     border: #E0E0E0 1px solid;
-	width:30px;
+	width:23px;
+	text-align: center;
 }
 
 .product-tile-footer {
@@ -136,7 +151,7 @@ body {
     background-color: #c95454;
     color: #ffffff;
 }
-.btnAddAction, #btnEmpty, #btnCheckout {
+.btnAddAction, #btnEmpty, #btnCheckout, #btnHistory {
     transition: all 0.3s ease;
 }
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -159,4 +174,19 @@ body {
 	border-radius: 9px;
 	margin: 10px 0px 10px 20px;
 	padding-right : 10px;
+}
+#btnHistory{
+	background-color: #ffffff;
+	border: #6100d0 1px solid;
+	padding: 5px 10px;
+	color: rgb(73, 0, 208);
+	float: left;
+	text-decoration: none;
+	border-radius: 9px;
+	margin: 10px 0px 10px 20px;
+	padding-right : 10px;
+}
+#btnHistory:hover{
+	background-color: #6100d0;
+	color: #ffffff;
 }

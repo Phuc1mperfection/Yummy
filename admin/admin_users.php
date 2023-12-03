@@ -15,15 +15,15 @@ $result = $conn->query($sql);
 <?php
 if ($result->num_rows > 0) {
 ?>
-    <table width = 100%>
+   <table style="width: 100%; ">
         <tr>
-            <th>Mã thành viên</th>
+            <th width = 10%>Mã thành viên</th>
             <th>Tên đăng nhập</th>
-            <th>Email</th>
+            <th width = 10%>Email</th>
             <th>Họ tên</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
-            <th>Actions</th>
+            <th >Actions</th>
         </tr>
         <?php while($row = $result->fetch_assoc()): ?>
         <tr>
