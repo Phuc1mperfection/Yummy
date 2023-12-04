@@ -1,5 +1,11 @@
 <?php
 require_once("../components/connection.php");
+if (isset($_SESSION['success']) && $_SESSION['success']) {
+    echo '<div class="alert alert-success" role="alert">
+            Sửa được rồi!
+          </div>';
+    unset($_SESSION['success']);
+}
 $sql = "SELECT * FROM thanhvien";
 $result = $conn->query($sql);
 ?>
@@ -34,7 +40,7 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["DiaChi"]; ?></td>
             <td><?php echo $row["SDT"]; ?></td>   
             <td>
-            <button type="button" class="btn btn-primary" onclick="window.location.href='admin_users_edit.php?action=edit&MaThanhVien=<?php echo $row["MaThanhVien"]; ?>'">Cập nhật</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='admin_home.php?page=admin_users_edit&action=edit&MaThanhVien=<?php echo $row["MaThanhVien"]; ?>'">Cập nhật</button>
             <button type="button" class="btn btn-danger" onclick="if(confirm('Are you sure?')) window.location.href='admin_users_edit.php?action=delete&MaThanhVien=<?php echo $row["MaThanhVien"]; ?>'">Xóa</button>            </td>
         </tr>
         <?php endwhile; ?>

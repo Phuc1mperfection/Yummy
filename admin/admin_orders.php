@@ -1,71 +1,118 @@
 <?php
-require_once("../components/connection.php");
-$sql = "SELECT * from donhang";
-$result = $conn->query($sql);
 
-if(!isset( $_SESSION["order_error"]))
-{
-    $_SESSION["order_error"]="";
-}
+
+require_once("../components/connection.php");
+
+$sql = "SELECT ctdonhang.MaDonHang, GROUP_CONCAT(monan.TenMonAn SEPARATOR ', ') as TenMonAn, donhang.TenNguoiNhan, donhang.DiaChiNhanHang, donhang.SDT, SUM(ctdonhang.SoLuong * ctdonhang.Gia) as TongTien,donhang.NgayDatHang, donhang.TrangThai
+        FROM ctdonhang
+        JOIN monan ON ctdonhang.MaMonAn = monan.MaMonAn
+        JOIN donhang ON ctdonhang.MaDonHang = donhang.MaDonHang
+        GROUP BY ctdonhang.MaDonHang";
+$result = $conn->query($sql);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Document</title>
 </head>
-
-<body>
-    <h1>Đơn hàng </h1>
-    <center><a href="admin_home.php?page=admin_blogs_add" style="
-        display: inline-block;
-        padding: 10px 20px;
+<style> table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th {
+        background-color: #af634c;
         color: white;
-        background-color: #4CAF50;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 16px;
-        font-weight: bold;
-    ">Thêm một đơn hàng mới
-    </a></center>
-    <?php
-    if ($result->num_rows > 0) {
-        ?>
-	<center><font color=aqua><?php echo $_SESSION["order_error"];?></font></center>
-    <table width = 85%>
+        padding: 15px;
+    }
+    td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+    }
+    tr:hover {background-color: #666362;}
+    </style>
+<h2>Quản lý đơn hàng</h2>
+<body>
+    <style>
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        body{
+            color: black;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+    </style>
+<?php
+if ($result->num_rows > 0) {
+?>
+    <table width = 100%>
         <tr>
             <th>Mã đơn hàng</th>
-            <th>Mã thành viên</th>
-            <th>Thời gian đặt hàng</th>
-            <th>Thời gian thanh toán</th>
-            <th>Địa chỉ nhận hàng</th>
-            <th>Cập nhật</th>
+            <th>Tên món ăn</th>
+            <th>Tên người nhận</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Tổng tiền</th>
+            <th>Ngày đặt</th>
+            <th>Trạng thái</th>
         </tr>
-        <?php while($row = $result->fetch_assoc()): ?>
+        <?php while ($row = $result->fetch_assoc()):?>
         <tr>
-            <td><?php echo $row["MaDonHang"]; ?></td>
-            <td><?php echo $row["MaThanhVien"]; ?></td>
-            <td><?php echo $row["ThoiGianDatHang"]; ?></td>
-            <td><?php echo $row["ThoiGianThanhToan"]; ?></td>
-            <td><?php echo $row["DiaChiNhanHang"]; ?></td>
-            <td><button type="button" class="btn btn-primary" onclick="window.location.href='admin_home.php?page=admin_orders_edit&madh=<?php echo $row['MaDonHang']; ?>'">Cập nhật</button> </td>
-            <td><button type="button" class="btn btn-danger" onclick="if(confirm('Are you sure?')) window.location.href='admin_orders_delete.php?madh=<?php echo $row['MaDonHang']; ?>'">Xóa</button>            </td>
+        <td><?php echo $row["MaDonHang"]?></td>
+            <td><?php echo $row["TenMonAn"]?></td>
+            <td><?php echo $row["TenNguoiNhan"]?></td>
+            <td><?php echo $row["DiaChiNhanHang"]?></td>
+            <td><?php echo $row["SDT"]?></td>
+            <td><?php echo number_format($row["TongTien"])?>đ</td>
+            <td><?php echo date('m-d-Y', strtotime($row["NgayDatHang"])) ?></td>
+                <?php $trangThai = $row["TrangThai"];
+            $trangThaiText = "";
+            if ($trangThai == 0) {
+                $trangThaiText = "Đơn hàng mới tạo";
+            } elseif ($trangThai == 1) {
+                $trangThaiText = "Đơn hàng đang được chuẩn bị";
+            } elseif ($trangThai == 2) {
+                $trangThaiText = "Đơn hàng đang trên đường giao đến bạn";
+            } elseif ($trangThai == 3) {
+                $trangThaiText = "Đơn hàng đã đến tay bạn";
+            } elseif ($trangThai == 4) {
+                $trangThaiText = "Đơn hàng đã bị huỷ";
+            }
+            ?>
+            <td><?php echo $trangThaiText; ?></td>
+            <?php echo "</tr>";?>
         </tr>
         <?php endwhile; ?>
     </table>
-    
 <?php
 } else {
-    echo " <tr> <h1> Không có Đơn hàng nào. </h1> </tr>";
+    echo "Bạn đã đặt đơn nào đâu !!!";
 }
 $conn->close();
 ?>
 </body>
 </html>
-<?php
-    $_SESSION["order_error"]="";
-    $_SESSION["order_add_error"]=" ";
-    $_SESSION["order_edit_error"]=" ";
-    $_SESSION["order_delete_error"]=" ";
-?>
+<div style="position: fixed; bottom: 0; width: 100%;">
+    <?php
+    include '../components/footer.php';
+    ?>
+</div>

@@ -5,9 +5,11 @@ FROM blog
 JOIN loaiblog ON blog.MaLoaiBlog = loaiblog.MaLoaiBlog";
 
 $result = $conn->query($sql);
-if(!isset( $_SESSION["blogs_error"]))
-{
-    $_SESSION["blogs_error"]="";
+if (isset($_SESSION['blogs_error']) && $_SESSION['blogs_error'] != "") {
+    echo '<div class="alert alert-success" role="alert">
+            '.$_SESSION["blogs_error"].'
+          </div>';
+    $_SESSION['blogs_error'] = "";
 }
 ?>
 <!DOCTYPE html>

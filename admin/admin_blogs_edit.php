@@ -31,21 +31,21 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
 <br>
 <center><font color=red><?php echo $_SESSION["blogs_edit_error"];?></font></center>
 <form method=POST action="admin_blogs_edit_action.php?MaBlog=<?php echo $mablog; ?>">
-    <table border=0 align=center width=400>
+    <table  border=0  width=100%>
         <tr>
             <td>Tên Blog:</td>
-            <td><input style="width:220px" type=text value="<?php echo $row["TenBlog"];?>" name=txtTenBlog></td>
+            <td><input style="width:320px" class="form-control" type=text value="<?php echo $row["TenBlog"];?>" name=txtTenBlog></td>
         </tr>
         <tr>
             <td>Thời gian đăng:</td>
-            <td><input type=datetime-local  style="width:220px" value="<?php echo $row["ThoiGianDang"];?>" name=txtThoiGianDang></td>
+            <td><input type=datetime-local  style="width:320px" class="form-control" value="<?php echo $row["ThoiGianDang"];?>" name=txtThoiGianDang></td>
         </tr>
         <tr>
             <td>Loại Blog:</td>
             <td>
-                <select name="slLoaiBlog">
+                <select name="slLoaiBlog" style="width:320px">
                     <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo $category['MaLoaiBlog']; ?>">
+                        <option c value="<?php echo $category['MaLoaiBlog']; ?>">
                             <?php echo $category['TenLoaiBlog']; ?>
                         </option>
                     <?php endforeach; ?>
@@ -54,7 +54,7 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
         </tr>
         <tr>
             <td>Nội dung:</td>
-            <td><textarea cols=20 style="width:220px" rows=6 name=taNoiDung value= ><?php echo $row["NoiDung"];?></textarea></td>
+            <td><textarea cols=20 style="width:320px" class="form-control" rows=6 name=taNoiDung value= ><?php echo $row["NoiDung"];?></textarea></td>
         </tr>
         <tr>
             <td align=right><input type=submit value="Update"></td>

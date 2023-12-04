@@ -1402,6 +1402,6 @@ section {
   background: #d1e5ff;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#e04545,#ec00d1);
+  background: linear-gradient(#9A3B3B,#6B240C);
   border-radius: 10px;
 }

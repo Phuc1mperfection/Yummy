@@ -4,7 +4,8 @@ session_start();
 require_once("../components/connection.php");
 $result = $conn->query("SELECT * FROM thanhvien WHERE tendangnhap = '" . $_SESSION['tendangnhap'] . "'");
 
-
+$sql1 = "SELECT * FROM donhang";
+$result1 = $conn->query($sql1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,11 +77,11 @@ $result = $conn->query("SELECT * FROM thanhvien WHERE tendangnhap = '" . $_SESSI
 <form action="users_process_checkout.php" method="post">
       <div class="order-form">
         <h2>Thông tin đặt hàng</h2>
+
+    <input type="hidden" id="NgayDatHang" name="NgayDatHang" value="<?php echo date('Y-d-m'); ?>">
         <?php 
 				while ($row = $result->fetch_assoc()){
 					?>
-
-
     <input type="hidden" id="MaThanhVien" name="MaThanhVien" required value="<?php echo $row["MaThanhVien"];?>">
         <div class="form-group">
             <label for="HoTen">Tên khách hàng:</label>

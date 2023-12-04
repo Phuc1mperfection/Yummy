@@ -1,6 +1,7 @@
 
 <?php 
 session_start();
+
 include '../components/header_users.php';
 require_once("../components/connection.php");
 
@@ -32,7 +33,7 @@ if (!empty($_GET["action"])){
                         );
                     }
                 } else {
-                    echo "No product found with MaMonAn: $MaMonAn";
+                    echo "Không có MaMonAn: $MaMonAn";
                 }
             }
             break;
@@ -154,8 +155,8 @@ if (!empty($_GET["action"])){
         </div>
         <div id="product-grid">
             <a id="btnEmpty" href="users_cart.php?action=empty">Xóa giỏ hàng</a>
-            <a id="btnCheckout" href="users_checkout.php">Xác nhận</a>
             <a id="btnHistory" href="users_order_history.php" >Lịch sử mua hàng</a>
+            <a id="btnCheckout" href="users_checkout.php">Xác nhận</a>
         </div>
 <br>
         <div id="product-grid">

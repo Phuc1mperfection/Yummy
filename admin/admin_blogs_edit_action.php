@@ -12,7 +12,7 @@ $sql ="update blog set TenBlog='$tenblog',ThoiGianDang='$thoigiandang',MaLoaiBlo
 
 $conn->query($sql) or die($conn->error);
 if ($conn->error == ""){
-    $_SESSION["blogs_error"] = "Update Successful!";
+    $_SESSION["blogs_error"] = "Sửa được luôn rồi!";
     header("Location:admin_home.php?page=admin_blogs");
 } else {
     $_SESSION["blogs_edit_error"]="Error update data!";

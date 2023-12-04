@@ -14,9 +14,10 @@ $DiaChiNhanHang = $_POST['DiaChi'];
 $email = $_POST['email'];
 $SDT = $_POST['SDT'];
 $TrangThai = 0;
+$NgayDatHang = $_POST['NgayDatHang']; 
 
-$sql = "INSERT INTO donhang (MaDonHang, MaThanhVien, MaPhuongThuc, TenNguoiNhan, DiaChiNhanHang, email, SDT, TrangThai) 
-        VALUES ('$MaDonHang', '$MaThanhVien', '$MaPhuongThuc', '$TenNguoiNhan', '$DiaChiNhanHang', '$email', '$SDT', '$TrangThai')";
+$sql = "INSERT INTO donhang (MaDonHang, MaThanhVien, MaPhuongThuc, TenNguoiNhan, DiaChiNhanHang, email, SDT, NgayDatHang, TrangThai) 
+        VALUES ('$MaDonHang', '$MaThanhVien', '$MaPhuongThuc', '$TenNguoiNhan', '$DiaChiNhanHang', '$email', '$SDT', '$NgayDatHang', '$TrangThai')";
 
 if (!$conn->query($sql)) {
     echo "Error inserting order: " . $conn->error;
@@ -57,7 +58,6 @@ foreach ($_SESSION['cart_item'] as $item) {
 <body>
 <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Bạn đặt thành công òi!</h4>
-        <p><?php echo $_SESSION['success_message']; ?></p>
         <hr>
         <p class="mb-0">Đơn hàng của bạn sẽ được chuyển về trang giỏ hàng sau 5 giây.</p>
     </div>

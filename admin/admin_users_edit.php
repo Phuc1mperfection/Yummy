@@ -6,14 +6,12 @@ if (!isset($_GET["MaThanhVien"]) || !isset($_GET["action"])) {
 
 $id = $_GET["MaThanhVien"];
 $action = $_GET["action"];
-
 $sql = "SELECT * FROM thanhvien WHERE MaThanhVien = $id";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-
+$success = false;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($action == "edit") {
-        // Get the form data
         $TenDangNhap = $_POST["tendangnhap"];
         $MatKhau = $_POST["matkhau"];
         $HoTen = $_POST["hoten"];
@@ -24,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssssi", $TenDangNhap, $MatKhau, $HoTen, $DiaChi, $SDT, $Email, $id);
         $stmt->execute();
+        $_SESSION['success'] = true;
         header("Location: admin_home.php?page=admin_users");
         exit;
     }
@@ -34,10 +33,15 @@ if ($action == "delete") {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
+    $_SESSION['success'] = true;
     header("Location: admin_home.php?page=admin_users");
     exit;
 }
-
+if ($success) {
+    echo '<div class="alert alert-success" role="alert">
+            Action was successful!
+          </div>';
+}
     
 ?>
 <!DOCTYPE html>

@@ -3,7 +3,7 @@ session_start();
 include '../components/header_users.php';
 require_once("../components/connection.php");
 
-$sql = "SELECT ctdonhang.MaDonHang, GROUP_CONCAT(monan.TenMonAn SEPARATOR ', ') as TenMonAn, donhang.TenNguoiNhan, donhang.DiaChiNhanHang, donhang.SDT, SUM(ctdonhang.SoLuong * ctdonhang.Gia) as TongTien, donhang.TrangThai
+$sql = "SELECT ctdonhang.MaDonHang, GROUP_CONCAT(monan.TenMonAn SEPARATOR ', ') as TenMonAn, donhang.TenNguoiNhan, donhang.DiaChiNhanHang, donhang.SDT, SUM(ctdonhang.SoLuong * ctdonhang.Gia) as TongTien,donhang.NgayDatHang, donhang.TrangThai
         FROM ctdonhang
         JOIN monan ON ctdonhang.MaMonAn = monan.MaMonAn
         JOIN donhang ON ctdonhang.MaDonHang = donhang.MaDonHang
@@ -72,6 +72,7 @@ if ($result->num_rows > 0) {
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
             <th>Tổng tiền</th>
+            <th>Ngày đặt</th>
             <th>Trạng thái</th>
         </tr>
         <?php while ($row = $result->fetch_assoc()):?>
@@ -82,16 +83,19 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["DiaChiNhanHang"]?></td>
             <td><?php echo $row["SDT"]?></td>
             <td><?php echo number_format($row["TongTien"])?>đ</td>
-            <?php $trangThai = $row["TrangThai"];
+            <td><?php echo date('m-d-Y', strtotime($row["NgayDatHang"])) ?></td>
+                <?php $trangThai = $row["TrangThai"];
             $trangThaiText = "";
             if ($trangThai == 0) {
                 $trangThaiText = "Đơn hàng mới tạo";
             } elseif ($trangThai == 1) {
-                $trangThaiText = "Đơn đã thanh toán";
+                $trangThaiText = "Đơn hàng đang được chuẩn bị";
             } elseif ($trangThai == 2) {
-                $trangThaiText = "Đơn đã giao hàng";
+                $trangThaiText = "Đơn hàng đang trên đường giao đến bạn";
             } elseif ($trangThai == 3) {
-                $trangThaiText = "Đơn hàng đã huỷ";
+                $trangThaiText = "Đơn hàng đã đến tay bạn";
+            } elseif ($trangThai == 4) {
+                $trangThaiText = "Đơn hàng đã bị huỷ";
             }
             ?>
             <td><?php echo $trangThaiText; ?></td>
@@ -101,7 +105,7 @@ if ($result->num_rows > 0) {
     </table>
 <?php
 } else {
-    echo "Không có thành viên nào.";
+    echo "Bạn đã đặt đơn nào đâu !!!";
 }
 $conn->close();
 ?>
