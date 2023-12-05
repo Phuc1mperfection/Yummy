@@ -34,7 +34,10 @@ if (isset($_SESSION['Error'])) {
     echo '<div class="alert alert-danger">' . $_SESSION['Error'] . '</div>';
     unset($_SESSION['Error']);
 }
-
+if (isset($_SESSION['Success'])) {
+    echo "<div class='alert alert-success'>" . $_SESSION['Success'] . "</div>";
+    unset($_SESSION['Success']);
+}
 $conn->close();
 ?>
 

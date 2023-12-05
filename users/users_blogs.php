@@ -90,7 +90,7 @@ include_once("../components/header_users.php");
 
 
 <tr>
-    <td align=CENTER><input type=submit value="Post"> <input type=reset value="Reset"></td>
+    <td align=CENTER><input type=submit value="Đăng"> <input type=reset value="Làm lại"></td>
     
 </tr>
 </table>

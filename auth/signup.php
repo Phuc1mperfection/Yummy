@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../components/connection.php");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $tendangNhap = $_POST['TenDangNhap'];
@@ -9,23 +10,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $matKhau = $_POST['MatKhau'];
     $sdt = $_POST['SDT'];
 
-    $sql = "INSERT INTO thanhvien (Email, TenDangNhap, HoTen, DiaChi, MatKhau, SDT) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $email, $tendangNhap, $hoTen, $diaChi, $matKhau, $sdt);
+    // Check if TenDangNhap already exists
+    $checkSql = "SELECT * FROM thanhvien WHERE TenDangNhap = '$tendangNhap'";
+    $checkResult = $conn->query($checkSql);
 
-    if ($stmt->execute()) {
-        $_SESSION['Success'] = "Đăng ký thành công";
-        header('Location: ../index.php'); 
-        exit();
+    if ($checkResult->num_rows > 0) {
+        $_SESSION['Error'] = "Tên đăng nhập đã tồn tại. Vui lòng chọn tên đăng nhập khác.";
     } else {
-        $_SESSION['Error'] = "Đăng ký không thành công. Vui lòng thử lại.";
-        echo "Error: " . $sql . "<br>" . $conn->error; 
+        $sql = "INSERT INTO thanhvien (Email, TenDangNhap, HoTen, DiaChi, MatKhau, SDT) VALUES ('$email', '$tendangNhap', '$hoTen', '$diaChi', '$matKhau', '$sdt')";
+        $result = $conn->query($sql);
+
+        if ($result) {
+            $_SESSION['Success'] = "Đăng ký thành công. Vui lòng đăng nhập.";
+			header('Location: login.php');
+			exit();
+        } else {
+            $_SESSION['Error'] = "Đăng ký không thành công. Vui lòng thử lại.";
+            echo "Error: " . $sql . "<br>" . $conn->error; 
+        }
     }
-    $stmt->close();
+	if (isset($_SESSION['Error'])) {
+		echo '<div class="alert alert-danger">' . $_SESSION['Error'] . '</div>';
+		unset($_SESSION['Error']);
+	}
 }
+
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,30 +100,25 @@ if (isset($_SESSION['Success'])) {
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="text" name="SDT">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Số điện  thoại</span>
+						<span class="label-input100">Số điện thoại</span>
 					</div>
-
+					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Đăng ký
 						</button>
 					</div>
-					
-					<!-- <div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or sign up using
-						</span>
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						
+
+						<div>
+							<br>
+							<a href="login.php" class="txt1">
+								Đã có tài khoản ? Đăng nhập thôi
+							</a>
+						</div>
 					</div>
 
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
-
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</div> -->
 				</form>
 				<div class="login100-more" style="background-image: url('/Yummy/assets/img/signup.jpg');">
 				</div>
@@ -129,5 +135,6 @@ if (isset($_SESSION['Success'])) {
 <script src="Yummy/vendor/countdowntime/countdowntime.js"></script>
 <script src="Yummy/js/main.js"></script>
 
+</script>
 </body>
 </html>
