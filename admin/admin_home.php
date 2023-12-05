@@ -1,9 +1,22 @@
 <?php
 session_start();
 require_once("../components/connection.php");
+$result = $conn->query("SELECT COUNT(*) AS total1 FROM thanhvien");
+$row = $result->fetch_assoc();
+$totalUsers = $row['total1'];
+
+$result = $conn->query("SELECT COUNT(*) AS total2 FROM gopy");
+$row = $result->fetch_assoc();
+$totalBlogs = $row['total2'];
+
+$result = $conn->query("SELECT COUNT(*) AS total3 FROM blog");
+$row = $result->fetch_assoc();
+$totalComments = $row['total3'];
+
 if (!isset($_SESSION['tendangnhap'])) {
     header('Location: login.php');
     exit();
+
 }
 ?>
 <?php include '../components/header_login.php'?>
@@ -78,6 +91,35 @@ body {
 background-image: linear-gradient(326deg, black 0%, #7b403b 74%);
     color: #fff;
 }
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #A67C52; /* a shade of brown */
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #8B4513; /* a darker shade of brown */
+    border-radius: 5px;
+    background-color: #D2B48C; /* a lighter shade of brown */
+    width: 30%;
+}
+
+.stat h2 {
+    color: #A67B5B;
+    margin-bottom: 10px;
+}
+
+.stat p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #7b403b;
+}
+
     </style>
 </head>
 <body>
@@ -89,9 +131,13 @@ background-image: linear-gradient(326deg, black 0%, #7b403b 74%);
     <a href="admin_home.php?page=admin_foods">Quản lý Món ăn</a>
     <a href="admin_home.php?page=admin_categories">Quản lý Danh mục</a>
     <a href="admin_home.php?page=admin_orders">Quản lý Đơn hàng</a>
+    <a href="admin_home.php?page=admin_stats">Thống kê</a>
     </div>
 
     <div class="admin-panel">
+    
+    
+
     <?php
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
@@ -99,5 +145,6 @@ background-image: linear-gradient(326deg, black 0%, #7b403b 74%);
     }
     ?>
     </div>
+   
 </body>
 </html>

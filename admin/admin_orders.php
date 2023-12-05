@@ -1,6 +1,4 @@
 <?php
-
-
 require_once("../components/connection.php");
 
 $sql = "SELECT ctdonhang.MaDonHang, GROUP_CONCAT(monan.TenMonAn SEPARATOR ', ') as TenMonAn, donhang.TenNguoiNhan, donhang.DiaChiNhanHang, donhang.SDT, SUM(ctdonhang.SoLuong * ctdonhang.Gia) as TongTien,donhang.NgayDatHang, donhang.TrangThai
@@ -10,14 +8,11 @@ $sql = "SELECT ctdonhang.MaDonHang, GROUP_CONCAT(monan.TenMonAn SEPARATOR ', ') 
         GROUP BY ctdonhang.MaDonHang";
 $result = $conn->query($sql);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <style> table {
@@ -33,6 +28,9 @@ $result = $conn->query($sql);
         padding: 15px;
         border-bottom: 1px solid #ddd;
     }
+    tr {
+    transition: background-color 0.3s ease;
+}
     tr:hover {background-color: #666362;}
     </style>
 <h2>Quản lý đơn hàng</h2>
@@ -111,8 +109,6 @@ $conn->close();
 ?>
 </body>
 </html>
-<div style="position: fixed; bottom: 0; width: 100%;">
-    <?php
-    include '../components/footer.php';
-    ?>
+        <p>Yummy Team</p>
+    </div>
 </div>

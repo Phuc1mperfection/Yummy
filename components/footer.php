@@ -30,7 +30,7 @@
         <h4>Đặt bàn</h4>
         <p>
           <strong>Phone:</strong> +1 5589 55488 55<br>
-          <strong>Email:</strong> info@example.com<br>
+          <strong>Email:</strong> alo@123.com<br>
         </p>
       </div>
     </div>
