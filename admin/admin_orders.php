@@ -32,33 +32,38 @@ $result = $conn->query($sql);
     transition: background-color 0.3s ease;
 }
     tr:hover {background-color: #666362;}
+    table {
+  width: 80%;
+  margin: 20px auto;
+  font-size:20px;
+    text-align: center;}
+
+      th, td {
+        border: 2px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #af634c;
+        color: white;
+        font-size: 22px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      body{
+        background-color: #f2f2f2;
+      }
+      /* Để làm cho ảnh có góc bo tròn */
+      img {
+        border-radius: 5px;
+      }
     </style>
 <h2>Quản lý đơn hàng</h2>
 <body>
-    <style>
-        h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        a {
-            text-decoration: none;
-            color: black;
-        }
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        body{
-            color: black;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-        }
-    </style>
 <?php
 if ($result->num_rows > 0) {
 ?>
@@ -109,6 +114,5 @@ $conn->close();
 ?>
 </body>
 </html>
-        <p>Yummy Team</p>
     </div>
 </div>

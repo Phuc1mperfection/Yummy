@@ -40,11 +40,11 @@
           <li><a href="../users/users_book_table.php">Đặt bàn</a></li>
 
           <li><a href="../users/users_comments.php">Gửi lời yêu thương</a></li>
-          <li><a href="">Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
+          <li><a href="#">Welcome, <?php echo $_SESSION['tendangnhap']; ?></a></li>
         </ul>
       </nav>
-      <a href="../auth/logout.php" class="btn-book-a-table" style="background-color: #252A34 ";>Đăng xuất</a>
-      <a class="btn-book-a-table" href="#book-a-table" style="background-color: #FF2E63 ">Đặt bàn</a>
+      <a href="../auth/logout.php" class="btn-book-a-table" style="background-color: #252A34; margin-right:100px ";>Đăng xuất</a>
+      <a class="btn-book-a-table" href="../users/users_book_table.php" style="background-color: #FF2E63; ";>Đặt bàn</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     </div>

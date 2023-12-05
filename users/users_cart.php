@@ -96,6 +96,7 @@ if (!empty($_GET["action"])){
 	</head>
 	<body>
 		<style>
+            
         a {
         text-decoration: none;
         color: #af634c;

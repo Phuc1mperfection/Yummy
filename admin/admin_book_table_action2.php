@@ -5,7 +5,7 @@ session_start();
     $trangthai = $_GET["trangthai"];
 
     $sql ="update datban set
-				 Trangthai= $trangthai
+				 TrangThai= $trangthai
 			where MaDatBan=$MaDatBan";
 			
 			
@@ -13,11 +13,19 @@ session_start();
 
                 $conn->query($sql) or die($conn->error);
 			if ($conn->error == ""){
-				$_SESSION["admin_book_table"]="Xác nhận thành công";
-				header("Location:admin_home.php?page=admin_book_table");
+				echo "<script>
+				alert('Xác nhận đơn đặt thành công!');
+				setTimeout(function() {
+					window.location.replace('admin_home.php?page=admin_book_table');
+				}, 2000);
+			 </script>";
 			} else {
-				$_SESSION["admin_book_table"]="Xác nhận thất bại";
-				header("Location:admin_home.php?page=admin_book_table");
+				echo "<script>
+				alert('Xác nhận đơn đặt không thành công!');
+				setTimeout(function() {
+					window.location.replace('admin_home.php?page=admin_book_table');
+				}, 2000);
+			 </script>";
 			}
 
 ?>

@@ -2,23 +2,16 @@
 require_once("../components/connection.php");
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $sql = "DELETE FROM gopy WHERE MaGopY = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    $sql = "DELETE FROM gopy WHERE MaGopY = $id";
+    $conn->query($sql);
     header("Location: admin_home.php?page=admin_comments");
     exit;
-    $stmt->close();
-
 }
 
 $sql = "SELECT gopy.*, thanhvien.hoten FROM gopy INNER JOIN thanhvien ON gopy.MaThanhVien = thanhvien.MaThanhVien";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->get_result();
+$result = $conn->query($sql);
 $comments = $result->fetch_all(MYSQLI_ASSOC);
 
-$stmt->close();
 $conn->close();
 ?>
 
@@ -30,14 +23,45 @@ $conn->close();
     <title>Document</title>
 </head>
 <body>
+    <style>
+    table {
+  width: 80%;
+  margin: 20px auto;
+  font-size:20px;
+    text-align: center;}
+
+      th, td {
+        border: 2px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #af634c;
+        color: white;
+        font-size: 22px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      body{
+        background-color: #f2f2f2;
+      }
+      /* Để làm cho ảnh có góc bo tròn */
+      img {
+        border-radius: 5px;
+      }
+    </style>
 <h2>Admin Comments</h2>
 
 <table width = 100%>
     <thead align="center">
         <tr>
-            <th>HoTen</th>
-            <th>ChuDe</th>
-            <th>NoiDung</th>
+            <th>Họ tên</th>
+            <th>Chủ đề</th>
+            <th>Nội dung</th>
             <th>Thao tác</th>
         </tr>
     </thead>

@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session at the top of your script
+session_start(); 
 
 require_once("../components/connection.php");
 
@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result->num_rows > 0) {
         $_SESSION['tendangnhap'] = $tendangnhap;
+		$_SESSION['MaThanhVien'] = $MaThanhVien;
         header('Location: ../users/users_home.php');
         exit(); 
     } else {

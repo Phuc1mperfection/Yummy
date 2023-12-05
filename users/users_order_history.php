@@ -2,13 +2,11 @@
 session_start();
 include '../components/header_users.php';
 require_once("../components/connection.php");
-
-$sql = "SELECT ctdonhang.MaDonHang, GROUP_CONCAT(monan.TenMonAn SEPARATOR ', ') as TenMonAn, donhang.TenNguoiNhan, donhang.DiaChiNhanHang, donhang.SDT, SUM(ctdonhang.SoLuong * ctdonhang.Gia) as TongTien,donhang.NgayDatHang, donhang.TrangThai
-        FROM ctdonhang
-        JOIN monan ON ctdonhang.MaMonAn = monan.MaMonAn
-        JOIN donhang ON ctdonhang.MaDonHang = donhang.MaDonHang
-        GROUP BY ctdonhang.MaDonHang";
+$tendangnhap = $_SESSION["tendangnhap"];
+$sql = "SELECT * FROM thanhvien WHERE TenDangNhap like '$tendangnhap'";
 $result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$matv = intval($row['MaThanhVien']);
 ?>
 
 
@@ -20,7 +18,8 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<style> table {
+<style> 
+    table {
         width: 100%;
         border-collapse: collapse;
     }
@@ -34,11 +33,7 @@ $result = $conn->query($sql);
         border-bottom: 1px solid #ddd;
     }
     tr:hover {background-color: #f5f5f5;}
-    </style>
-<h2>Lịch sử đơn hàng</h2>
-<body>
-    <style>
-        h2 {
+    h2 {
             margin-bottom: 20px;
             text-align: center;
         }
@@ -47,7 +42,7 @@ $result = $conn->query($sql);
             color: black;
         }
         table, th, td {
-            border: 1px solid black;
+            border: 2px solid black;
             border-collapse: collapse;
         }
         th, td {
@@ -61,6 +56,9 @@ $result = $conn->query($sql);
             background-color: #ffffff;
         }
     </style>
+<h2>Lịch sử đơn hàng</h2>
+<body>
+
 <?php
 if ($result->num_rows > 0) {
 ?>
@@ -75,7 +73,16 @@ if ($result->num_rows > 0) {
             <th>Ngày đặt</th>
             <th>Trạng thái</th>
         </tr>
-        <?php while ($row = $result->fetch_assoc()):?>
+        <?php
+        $sql1 = "SELECT ctdonhang.MaDonHang, GROUP_CONCAT(monan.TenMonAn SEPARATOR ', ') as TenMonAn, donhang.TenNguoiNhan, donhang.DiaChiNhanHang, donhang.SDT, SUM(ctdonhang.SoLuong * ctdonhang.Gia) as TongTien,donhang.NgayDatHang, donhang.TrangThai
+        FROM ctdonhang
+        JOIN monan ON ctdonhang.MaMonAn = monan.MaMonAn
+        JOIN donhang ON ctdonhang.MaDonHang = donhang.MaDonHang
+        WHERE donhang.MaThanhVien = $matv
+        GROUP BY ctdonhang.MaDonHang";
+        $result = $conn->query($sql1);
+        
+        while ($row = $result->fetch_assoc()):?>
         <tr>
         <td><?php echo $row["MaDonHang"]?></td>
             <td><?php echo $row["TenMonAn"]?></td>

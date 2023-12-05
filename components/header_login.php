@@ -19,9 +19,10 @@
   .button-container {
     display: flex;
 }
+
 </style>
-<header id="header" class="header_login fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
+<header id="header" class="header_login fixed-top d-flex align-items-center" >   
+ <div class="container d-flex align-items-center justify-content-between">
 
       <a href="admin_home.php" class="logo d-flex align-items-center me-auto me-lg-0">
         <h1>Yummy<span>.</span></h1>

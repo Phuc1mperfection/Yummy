@@ -19,7 +19,36 @@ if (isset($_SESSION['blogs_error']) && $_SESSION['blogs_error'] != "") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+          table {
+  width: 80%;
+  margin: 20px auto;
+  font-size:20px;
+    text-align: center;}
 
+      th, td {
+        border: 2px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #af634c;
+        color: white;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      body{
+        background-color: #f2f2f2;
+      }
+      /* Để làm cho ảnh có góc bo tròn */
+      img {
+        border-radius: 5px;
+      }
+</style>
 <body>
 <?php
 if ($result->num_rows > 0) {

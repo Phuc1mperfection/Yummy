@@ -19,28 +19,68 @@ require_once("../components/connection.php");
 </head>
 <body>
     <style>
-        a{
-            text-decoration: none;
-        }
+        table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th {
+        background-color: #af634c;
+        color: white;
+        padding: 15px;
+    }
+    tr {
+    transition: background-color 0.3s ease;
+}
+    tr:hover {background-color: #666362;}
+            
+          table {
+  width: 80%;
+  margin: 20px auto;
+  font-size:20px;
+    text-align: center;}
+
+      th, td {
+        border: 2px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #af634c;
+        color: white;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      body{
+        background-color: #f2f2f2;
+      }
+      /* Để làm cho ảnh có góc bo tròn */
+      img {
+        border-radius: 5px;
+      }
+</style>
     </style>
   <div style="margin-right:170px; color:white;">
-     <center> <h2> DANH SÁCH ĐƠN ĐẶT BÀN CỦA KHÁCH HÀNG</h2> </center>
+      <h2> Thành viên đặt bàn</h2> 
 
      <center> <font color:pink> <?php echo $_SESSION["admin_book_table"] ?> </font></center>
      <br>
-     <table width=90% align=center border=2>
+     <table width=100% align=center border = 1>
       <tr>
-        <th>Tài khoản</th>
+        <th width= 10%>Tài khoản</th>
         <th>Tên khách hàng</th>
         <th>Loại bàn</th>
         <th>Thời gian đặt</th>
         <th>Thời gian hẹn đến</th>
         <th>Trạng thái</th>
-        <th>Xem chi tiết</th>
+        <th>Xem chi tiết->xác nhận</th>
       </tr>
 
       <?php
-        $sql1 = "select * from datban, ban, thanhvien where datban.Maban = ban.Maban and datban.MaThanhVien=thanhvien.MaThanhVien";
+        $sql1 = "select * from datban, ban, thanhvien where datban.MaBan = ban.MaBan and datban.MaThanhVien=thanhvien.MaThanhVien order by ThoiGianDat desc";
          $result = $conn->query($sql1);
          while($rows = $result->fetch_assoc())
          {
@@ -48,9 +88,9 @@ require_once("../components/connection.php");
         <tr>
         <td> <?php echo $rows["TenDangNhap"]; ?> </td>
         <td> <?php echo $rows["HoTen"]; ?> </td>
-          <td> <?php echo $rows["Loaiban"]; ?> </td>
+          <td> <?php echo $rows["LoaiBan"]; ?> </td>
           <td> <?php echo $rows["ThoiGianDat"] ?> </td>
-          <td> <?php echo $rows["Thoigianhenden"] ?> </td>
+          <td> <?php echo $rows["ThoiGianHenDen"] ?> </td>
           <td> <?php
 
                 if(($rows["TrangThai"])=="1")
@@ -59,13 +99,13 @@ require_once("../components/connection.php");
                     echo "Đang chờ xác nhận";
 
                 }
-                else if(($rows["TrangThai"])=="2")
+                if(($rows["TrangThai"])=="2")
                 {
                     
                     echo "Đã xác nhận";
 
                 }
-                else if(($rows["TrangThai"])=="3") {
+                if(($rows["TrangThai"])=="3") {
                     echo "Đã hoàn thành";
                 }
         
@@ -73,13 +113,14 @@ require_once("../components/connection.php");
 
            <td>
                 <?php
-                    if(intval($rows["TrangThai"])=="1")
+                    if($rows["TrangThai"]=="1")
                     {
-                        echo "<a href='admin_book_table_action.php?trangthai=2&MaDatBan=".$rows["MaDatBan"]."'> <button  type='button' class='btn btn-primary' > Xác nhận </button> </a> ";
+                        echo "<a href='admin_book_table_action.php?trangthai=2&MaDatBan=".$rows["MaDatBan"]."'> <button  type='button' class='btn btn-primary' > Xác nhận Đơn đặt </button> </a> ";
                     }
-                    else if(intval($rows["TrangThai"])=="2")
+                    else if($rows["TrangThai"]=="2")
                     {
-                        echo "<a href='admin_book_table_action.php?trangthai=3&MaDatBan=".$rows["MaDatBan"]."'> <button> Xác nhận </button> </a> ";
+                        echo "<a href='admin_book_table_action.php?trangthai=3&MaDatBan=".$rows["MaDatBan"]."'> <button  type='button' class='btn btn-primary' > Xác nhận hoàn thành </button> </a> ";
+                        
                     }
                     else{
                         echo " Đã xác nhận ";

@@ -46,7 +46,7 @@ if (!isset($_SESSION['tendangnhap'])) {
 body {
     font-family: Poppins, sans-serif;
     display: flex;
-    background-color: #dee4ea;
+    background-color: whitesmoke;
     margin: 0;
 }
 
