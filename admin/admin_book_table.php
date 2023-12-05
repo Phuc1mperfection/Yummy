@@ -18,12 +18,17 @@ require_once("../components/connection.php");
 </script>
 </head>
 <body>
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
   <div style="margin-right:170px; color:white;">
      <center> <h2> DANH SÁCH ĐƠN ĐẶT BÀN CỦA KHÁCH HÀNG</h2> </center>
 
      <center> <font color:pink> <?php echo $_SESSION["admin_book_table"] ?> </font></center>
      <br>
-     <table width=80% align=center border=2>
+     <table width=90% align=center border=2>
       <tr>
         <th>Tài khoản</th>
         <th>Tên khách hàng</th>
@@ -47,19 +52,20 @@ require_once("../components/connection.php");
           <td> <?php echo $rows["ThoiGianDat"] ?> </td>
           <td> <?php echo $rows["Thoigianhenden"] ?> </td>
           <td> <?php
-                if(($rows["TrangThai"])==1)
+
+                if(($rows["TrangThai"])=="1")
                 {
                  
                     echo "Đang chờ xác nhận";
 
                 }
-                else if(($rows["TrangThai"])==2)
+                else if(($rows["TrangThai"])=="2")
                 {
                     
                     echo "Đã xác nhận";
 
                 }
-                else if(($rows["Trangthai"])=="3") {
+                else if(($rows["TrangThai"])=="3") {
                     echo "Đã hoàn thành";
                 }
         
@@ -67,11 +73,11 @@ require_once("../components/connection.php");
 
            <td>
                 <?php
-                    if(intval($rows["Trangthai"])=="1")
+                    if(intval($rows["TrangThai"])=="1")
                     {
-                        echo "<a href='admin_book_table_action.php?trangthai=2&MaDatBan=".$rows["MaDatBan"]."'> <button> Xác nhận </button> </a> ";
+                        echo "<a href='admin_book_table_action.php?trangthai=2&MaDatBan=".$rows["MaDatBan"]."'> <button  type='button' class='btn btn-primary' > Xác nhận </button> </a> ";
                     }
-                    else if(intval($rows["Trangthai"])=="2")
+                    else if(intval($rows["TrangThai"])=="2")
                     {
                         echo "<a href='admin_book_table_action.php?trangthai=3&MaDatBan=".$rows["MaDatBan"]."'> <button> Xác nhận </button> </a> ";
                     }

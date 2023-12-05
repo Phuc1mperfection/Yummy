@@ -36,21 +36,28 @@ $tentv = $rows['HoTen'];
          $result = $conn->query($sql1);
          while($rows = $result->fetch_assoc())
          {
-          $rows["Trangthai"] = ($rows["Trangthai"]);
+          $rows["Trangthai"] = strval($rows["Trangthai"]);
       ?>
         <tr>
           <td> <?php echo $rows["Loaiban"]; ?> </td>
           <td> <?php echo $rows["ThoiGianDat"] ?> </td>
           <td> <?php echo $rows["Thoigianhenden"] ?> </td>
           <td> <?php
-               if(intval($rows["Trangthai"]) == 1) {
-                echo "Đang chờ xác nhận";
-            } elseif (intval($rows["Trangthai"]) == 2) {
-                echo "Đã xác nhận";
+               if(($rows["TrangThai"])==1)
+               {
+                
+                   echo "Đang chờ xác nhận";
 
-            } elseif ($rows["Trangthai"] == 3) {
-                echo "Đã hoàn thành";
-            }
+               }
+               else if(($rows["TrangThai"])==2)
+               {
+                   
+                   echo "Đã xác nhận";
+
+               }
+               else if(($rows["TrangThai"])==3) {
+                   echo "Đã hoàn thành";
+               }
            ?> </td>
         </tr>
         <?php
