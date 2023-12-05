@@ -1,8 +1,7 @@
 <?php
 
 require_once("../components/connection.php");
-$tendangnhap = $_SESSION['tendangnhap'];
-$sql = "SELECT * FROM thanhvien WHERE TenDangNhap like '$tendangnhap'";
+$sql = "SELECT * FROM thanhvien ";
 $result = $conn->query($sql);
 $rows = $result->fetch_assoc();
 $matv = intval($rows['MaThanhVien']);
@@ -24,7 +23,7 @@ $tentv = $rows['HoTen'];
   <div style="margin-right:170px; color:white;">
      <center> <h2>LỊCH SỬ ĐẶT BÀN CỦA QUÝ KHÁCH <?php echo $tentv; ?></h2> </center>
      <br>
-     <table width=50% align=center border=2>
+     <table width=70% align=center border=2>
       <tr>
         <th>Loại bàn</th>
         <th>Thời gian đặt</th>
@@ -37,28 +36,25 @@ $tentv = $rows['HoTen'];
          $result = $conn->query($sql1);
          while($rows = $result->fetch_assoc())
          {
+          $rows["Trangthai"] = ($rows["Trangthai"]);
       ?>
         <tr>
           <td> <?php echo $rows["Loaiban"]; ?> </td>
-          <td> <?php echo $rows["Thoigiandat"] ?> </td>
+          <td> <?php echo $rows["ThoiGianDat"] ?> </td>
           <td> <?php echo $rows["Thoigianhenden"] ?> </td>
           <td> <?php
-                if(intval($rows["Trangthai"])==1)
-                {
-                    echo "Đang chờ xác nhận";
-                }
-                if(intval($rows["Trangthai"])==2)
-                {
-                    echo "Đã xác nhận";
-                }
-                if(intval($rows["Trangthai"])==3){
-                    echo "Đã hoàn thành";
-                }
+               if(intval($rows["Trangthai"]) == 1) {
+                echo "Đang chờ xác nhận";
+            } elseif (intval($rows["Trangthai"]) == 2) {
+                echo "Đã xác nhận";
+
+            } elseif ($rows["Trangthai"] == 3) {
+                echo "Đã hoàn thành";
             }
            ?> </td>
         </tr>
         <?php
-         
+         }
         ?>
 
         </table>

@@ -6,8 +6,7 @@ if(!isset($_SESSION["book_table"]))
   $_SESSION["book_table"]="";
 }
 require_once("../components/connection.php");
-$tendangnhap = $_SESSION['tendangnhap'];
-$sql = "SELECT * FROM thanhvien WHERE TenDangNhap like '$tendangnhap'";
+$sql = "SELECT * FROM thanhvien ";
 $result = $conn->query($sql);
 $rows = $result->fetch_assoc();
 $matv = $rows['MaThanhVien'];
@@ -35,7 +34,7 @@ $matv = $rows['MaThanhVien'];
 <body>
   <div style="margin-right:170px; color:white;">
      <center> <h2>MỜI QUÝ KHÁCH ĐẶT BÀN</h2> </center>
-     <center> <a href="users_home.php?page=users_book_table_history"> <h5 style="color:aqua;">Lịch sử đặt bàn</h5> </a> </center>
+     <center> <a href="users_book_table_history.php"> <h5 style="color:aqua;">Lịch sử đặt bàn</h5> </a> </center>
      <center> <font color:pink> <?php echo $_SESSION["book_table"] ?> </font></center>
      <br>
      <form method=POST action="users_book_table_action.php?matv=<?php echo $matv ?>">
@@ -47,7 +46,7 @@ $matv = $rows['MaThanhVien'];
               while($rows = $result->fetch_assoc())
               {
             ?>
-              <option value="<?php echo $rows['Loaiban']; ?>"> <?php echo $rows['Loaiban']; ?> </option>
+              <option value="<?php echo $rows['MaBan']; ?>"> <?php echo $rows['Loaiban']; ?> </option>
               <?php
               }
               ?>
