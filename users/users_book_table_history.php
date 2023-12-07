@@ -77,7 +77,7 @@ $tentv = $rows['HoTen'];
       </tr>
 
       <?php
-            $sql1 = "select * from datban, ban where datban.MaBan = ban.MaBan and MaThanhVien=$matv";
+            $sql1 = "select * from datban, ban where datban.MaBan = ban.MaBan and MaThanhVien=$matv order by ThoiGianDat DESC";
          $result = $conn->query($sql1);
          while($rows = $result->fetch_assoc())
          {
