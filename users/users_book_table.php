@@ -117,7 +117,7 @@ $matv = $rows['MaThanhVien'];
       ?>
         <tr>
           <td> <?php echo $rows["LoaiBan"]; ?> </td>
-          <td> <img src='../assets/img/bannh/<?php echo $rows["AnhBan"] ?>' width=200 alt=""> </td>
+          <td> <img src='../assets/img/bannh/<?php echo $rows["AnhBan"] ?>' width=500px alt=""> </td>
           <td> <?php echo $rows["SoLuongConLai"] ?> </td>
         </tr>
         <?php

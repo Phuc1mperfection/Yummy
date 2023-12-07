@@ -29,11 +29,18 @@ include_once("../components/header_users.php");
     }
     body{
         margin-top: 100px;
+        background-color: #f2f2f2;
         padding-left: 30px;
+    }
+    h1{
+        margin-top: 110px;
+    }  
+    table {
+  font-size:20px;
     }
 </style>
 	<body>
-		<h1 align=center>Viết Blog</h1>
+		<h2>Viết Blog</h2>
         <center><font color=red><?php echo isset($_SESSION["blogs_error"]) ? $_SESSION["blogs_error"] : ''; ?></font></center> 
             <form action="users_blogs_post.php" method="post" enctype="multipart/form-data">        
             <table border=0 align=left width=600 >
@@ -44,7 +51,7 @@ include_once("../components/header_users.php");
 </tr>
 
 <tr>
-<td><input style="width:1300px" type=text name=txtTenBlog></td>
+<td><input style="width:1200px" type=text name=txtTenBlog></td>
     
     <td>
         <?php
