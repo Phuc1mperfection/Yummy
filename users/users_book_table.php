@@ -51,7 +51,10 @@ $matv = $rows['MaThanhVien'];
       /* Để làm cho ảnh có góc bo tròn */
       img {
         border-radius: 5px;
-      }
+      } tr:hover {background-color: #f5f5f5;}  
+        tr {
+    transition: background-color 0.3s ease;
+    }
     </style>
 
     <script>
@@ -68,8 +71,11 @@ $matv = $rows['MaThanhVien'];
   <div style="margin-right:170px; color:black;">
   <br> <br> <br> <br> <br>
      <center> <h2 style="font-weight:bold; ">MỜI QUÝ KHÁCH ĐẶT BÀN</h2> </center>
-     <center> <a href="users_book_table_history.php"> <p>Lịch sử đặt bàn</p> </a> </center>
-     <center> <font color:pink> <?php echo $_SESSION["book_table"] ?> </font></center>
+     <center>
+    <a href="users_book_table_history.php" style="text-decoration: none;  font-size: 20px; font-weight: bold;">
+        <p>Lịch sử đặt bàn</p>
+    </a>
+</center>     <center> <font color:pink> <?php echo $_SESSION["book_table"] ?> </font></center>
      <br>
      <center>
      <div style="width:70%; padding:10px;">

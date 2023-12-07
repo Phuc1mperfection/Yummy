@@ -38,6 +38,8 @@ include_once("../components/header_users.php");
     table {
   font-size:20px;
     }
+    tr:hover {background-color: #f5f5f5;}
+    
 </style>
 	<body>
 		<h2>Viết Blog</h2>

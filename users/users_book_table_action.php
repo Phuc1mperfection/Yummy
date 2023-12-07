@@ -12,24 +12,18 @@ $sql = "INSERT INTO `datban` (`Maban`, `Mathanhvien`, `Thoigiandat`, `Thoigianhe
 
 $conn->query($sql) or die($conn->error);
 
-if($conn->connect_error=="")
-{
+if ($conn->connect_error == "") {
     echo "<script>
     alert('Đặt bàn thành công, Cảm ơn Quý khách đã sử dụng dịch vụ!');
     setTimeout(function() {
         window.location.replace('users_book_table.php');
     }, 2000);
  </script>";
-}
-
-else{
+} else {
     echo "<script>
     alert('Đặt bàn không thành công');
     setTimeout(function() {
         window.location.replace('users_book_table.php');
     }, 2000);
  </script>";
-}	
-        
-?>
-
+}

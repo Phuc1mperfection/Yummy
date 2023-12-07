@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $thoiGianDang = $_POST["txtThoiGianDang"];
     $maLoaiBlog = $_POST["txtMaLoaiBlog"];
     $noiDung = $_POST["taNoiDung"];
-    
+
     if (isset($_FILES["AnhBlog"]) && $_FILES["AnhBlog"]["error"] == 0) {
         $target_dir = "assets/img/blog/";
         $target_file = $target_dir . basename($_FILES["AnhBlog"]["name"]);
@@ -19,8 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sqlInsert = "INSERT INTO blog (TenBlog, ThoiGianDang, MaLoaiBlog, NoiDung, AnhBlog) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sqlInsert);
     $stmt->bind_param("ssiss", $tenBlog, $thoiGianDang, $maLoaiBlog, $noiDung, $target_file);
-
-} 
+}
 
 
 if ($stmt->execute()) {
@@ -34,11 +33,14 @@ if ($stmt->execute()) {
 $conn->close();
 ?>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Tiêu đề trang web</title>
-	</head>
-	<body>
-	
-	</body>
+
+<head>
+    <meta charset="utf-8">
+    <title>Tiêu đề trang web</title>
+</head>
+
+<body>
+
+</body>
+
 </html>

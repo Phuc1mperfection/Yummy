@@ -13,6 +13,7 @@ $tentv = $rows['HoTen'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,99 +22,109 @@ $tentv = $rows['HoTen'];
     <title>Document</title>
 
     <style>
-      
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        padding-left: 100px;
-        margin-left: 100px;
-    }
-    th {
-        background-color: #af634c;
-        color: white;
-        padding: 15px;
-    }
-    td {
-        padding: 15px;
-        border-bottom: 1px solid #ddd;
-    }
-    tr:hover {background-color: #f5f5f5;}
-    h2 {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            padding-left: 100px;
+            margin-left: 100px;
+        }
+
+        th {
+            background-color: #af634c;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        h2 {
             margin-bottom: 20px;
             text-align: center;
         }
+
         a {
             text-decoration: none;
             color: black;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid black;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
-        body{
+
+        body {
             margin: 0;
             padding: 0;
             background-color: #ffffff;
         }
     </style>
 
-</script>
+    </script>
 </head>
+
 <body>
-  <br> <br> <br> <br>
-  <div style="margin-right:170px; color:black;">
-     <center> <h3 style="font-weight:bold;">Lịch sử đặt bàn của <?php echo $tentv; ?></h3> </center>
-     <br>
-     <table width=100% align=center border=1>
-      <tr>
-        <th>Loại bàn</th>
-        <th>Thời gian đặt</th>
-        <th>Thời gian hẹn đến</th>
-        <th>Trạng thái</th>
-      </tr>
+    <br> <br> <br> <br>
+    <div style="margin-right:170px; color:black;">
+        <center>
+            <h3 style="font-weight:bold;">Lịch sử đặt bàn của <?php echo $tentv; ?></h3>
+        </center>
+        <br>
+        <table width=100% align=center border=1>
+            <tr>
+                <th>Loại bàn</th>
+                <th>Thời gian đặt</th>
+                <th>Thời gian hẹn đến</th>
+                <th>Trạng thái</th>
+            </tr>
 
-      <?php
+            <?php
             $sql1 = "select * from datban, ban where datban.MaBan = ban.MaBan and MaThanhVien=$matv order by ThoiGianDat DESC";
-         $result = $conn->query($sql1);
-         while($rows = $result->fetch_assoc())
-         {
+            $result = $conn->query($sql1);
+            while ($rows = $result->fetch_assoc()) {
 
-          
-      ?>
-        <tr>
-          <td> <?php echo $rows["LoaiBan"]; ?> </td>
-          <td> <?php echo $rows["ThoiGianDat"]; ?> </td>
-          <td> <?php echo $rows["ThoiGianHenDen"]; ?> </td>
-          <td> <?php
-               if($rows["TrangThai"]=="1")
-               {
-                
-                   echo "Đang chờ xác nhận";
 
-               }
-               if($rows["TrangThai"]=="2")
-               {
-                   
-                   echo "Đã xác nhận";
+            ?>
+                <tr>
+                    <td> <?php echo $rows["LoaiBan"]; ?> </td>
+                    <td> <?php echo $rows["ThoiGianDat"]; ?> </td>
+                    <td> <?php echo $rows["ThoiGianHenDen"]; ?> </td>
+                    <td> <?php
+                            if ($rows["TrangThai"] == "1") {
 
-               }
-               if($rows["TrangThai"]=="3") {
-                   echo "Đã hoàn thành";
-               }
-           ?> </td>
-        </tr>
-        <?php
-         }
-        ?>
+                                echo "Đang chờ xác nhận";
+                            }
+                            if ($rows["TrangThai"] == "2") {
+
+                                echo "Đã xác nhận";
+                            }
+                            if ($rows["TrangThai"] == "3") {
+                                echo "Đã hoàn thành";
+                            }
+                            ?> </td>
+                </tr>
+            <?php
+            }
+            ?>
 
         </table>
 
-        </div>
-  
-</body>
-</html>
+    </div>
 
+</body>
+
+</html>

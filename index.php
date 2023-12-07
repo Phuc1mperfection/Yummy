@@ -201,7 +201,7 @@ $stmt->close();
                 echo '<h4>' . $rowMonAn['TenMonAn'] . '</h4>';
                 echo '<p class="ingredients">' . $rowMonAn['ThongTinMonAn'] . '</p>';
                 echo '<p class="price">' . number_format($rowMonAn['Gia']) . ' đ</p>';
-                echo '</div><!-- Menu Item -->';
+                echo '</div>';
             }
 
             echo '</div>';
@@ -264,7 +264,7 @@ $stmt->close();
         </div>
     </div>
 </section>
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" style="background-color: #eee;">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
