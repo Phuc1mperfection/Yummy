@@ -29,10 +29,12 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
             width: 100%;
             border-collapse: collapse;
             padding-left: 100px;
-            margin-left: 400px;
+            margin-left: 500px;
         }
-        
-        
+        .form-control{
+            width: 500px;
+            margin-right: 600px;
+        }
 </style>
 <body>
 <h1 align=center>Cập nhật Blogs</h1>
@@ -42,7 +44,7 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
     <table  border=0  width=100%>
         <tr>
             <td>Tên Blog:</td>
-            <td><input style="width: 500px;" class="form-control" type=text value="<?php echo $row["TenBlog"];?>" name=txtTenBlog></td>
+            <td><input  class="form-control" type=text value="<?php echo $row["TenBlog"];?>" name=txtTenBlog></td>
         </tr>
         <tr>
             <td>Thời gian đăng:</td>
@@ -62,7 +64,7 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
         </tr>
         <tr>
             <td>Nội dung:</td>
-            <td><textarea cols=20 style="width: 500px;" class="form-control" rows=6 name=taNoiDung value= ><?php echo $row["NoiDung"];?></textarea></td>
+            <td><textarea cols=20 class="form-control" rows=6 name=taNoiDung value= ><?php echo $row["NoiDung"];?></textarea></td>
         </tr>
         <tr>
             <td align=right><input type=submit value="Update"></td>
