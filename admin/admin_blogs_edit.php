@@ -25,6 +25,14 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
     a{
         text-decoration: none;
         }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            padding-left: 100px;
+            margin-left: 400px;
+        }
+        
+        
 </style>
 <body>
 <h1 align=center>Cập nhật Blogs</h1>
@@ -34,16 +42,16 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
     <table  border=0  width=100%>
         <tr>
             <td>Tên Blog:</td>
-            <td><input style="width:320px" class="form-control" type=text value="<?php echo $row["TenBlog"];?>" name=txtTenBlog></td>
+            <td><input style="width: 500px;" class="form-control" type=text value="<?php echo $row["TenBlog"];?>" name=txtTenBlog></td>
         </tr>
         <tr>
             <td>Thời gian đăng:</td>
-            <td><input type=datetime-local  style="width:320px" class="form-control" value="<?php echo $row["ThoiGianDang"];?>" name=txtThoiGianDang></td>
+            <td><input style="width: 500px;" type=datetime-local  style="width:320px" class="form-control" value="<?php echo $row["ThoiGianDang"];?>" name=txtThoiGianDang></td>
         </tr>
         <tr>
             <td>Loại Blog:</td>
             <td>
-                <select name="slLoaiBlog" style="width:320px">
+                <select style="width: 500px;" name="slLoaiBlog" style="width:320px">
                     <?php foreach ($categories as $category): ?>
                         <option c value="<?php echo $category['MaLoaiBlog']; ?>">
                             <?php echo $category['TenLoaiBlog']; ?>
@@ -54,7 +62,7 @@ $categories = $resultCategories->fetch_all(MYSQLI_ASSOC);
         </tr>
         <tr>
             <td>Nội dung:</td>
-            <td><textarea cols=20 style="width:320px" class="form-control" rows=6 name=taNoiDung value= ><?php echo $row["NoiDung"];?></textarea></td>
+            <td><textarea cols=20 style="width: 500px;" class="form-control" rows=6 name=taNoiDung value= ><?php echo $row["NoiDung"];?></textarea></td>
         </tr>
         <tr>
             <td align=right><input type=submit value="Update"></td>
