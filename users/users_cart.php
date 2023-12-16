@@ -165,7 +165,7 @@ if (!empty($_GET["action"])) {
     </div>
     <br>
     <div id="product-grid">
-        <div class="txt-heading">Products</div>
+        <div class="txt-heading">Món ăn</div>
         <?php if ($result->num_rows > 0) {
             while ($r = $result->fetch_assoc()) {
         ?>
