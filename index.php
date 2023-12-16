@@ -27,9 +27,7 @@ $sqlBlog = "SELECT blog.*, loaiblog.TenLoaiBlog FROM blog JOIN loaiblog ON blog.
 $resultBlog = $conn->query($sqlBlog);
 $blogs = $resultBlog->fetch_all(MYSQLI_ASSOC);
 // Thực hiện truy vấn
-$sqlmonan = "SELECT * FROM monan";
 $sql1 = "SELECT * FROM danhmuc";
-$result = $conn->query($sqlmonan);
 
 $categoryId = isset($_GET['category']) ? $_GET['category'] : 1;
 $sql2 = "SELECT * FROM danhmuc";
@@ -189,7 +187,7 @@ $stmt->close();
         while ($row1 = $result1->fetch_assoc()) {
             $categoryId = $row1["MaDanhMuc"];
 
-            $sqlMonAn = "SELECT * FROM monan WHERE MaDanhMuc = $categoryId";
+            $sqlMonAn = "SELECT * FROM monan WHERE MaDanhMuc = $categoryId AND TrangThai = 1";
             $resultMonAn = $conn->query($sqlMonAn);
 
             echo '<div class="tab-content" id="menu-' . $categoryId . '" data-aos-delay="300">';
@@ -220,10 +218,10 @@ $stmt->close();
     }
 </script>
     <section id="gallery" class="gallery section-bg">
-      <div class="container" data-aos="fade-up">
+      <div class="container" >
         <div class="section-header">
-          <h2>gallery</h2>
-          <p>Check <span>Our Gallery</span></p>
+          <h2>Hình ảnh</h2>
+          <p>Nhà hàng đến check in <span> thì auto 1k like</span></p>
         </div>
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center">
@@ -242,12 +240,12 @@ $stmt->close();
     </section>
 
     <section id="blogs" class="blogs">
-    <div class="container-fluid" data-aos="fade-up">
+    <div class="container-fluid" >
         <div class="section-header">
             <h2>Blog</h2>
             <p>Blog <span>được các</span> Thành viên viết</p>
         </div>
-        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+        <div class="slides-3 swiper" >
             <div class="swiper-wrapper">
                 <?php foreach ($blogs as $blog): ?>
                     <div class="swiper-slide blog-item d-flex flex-column justify-content-end" style="background-image: url(<?php echo $blog['AnhBlog']; ?>)">
@@ -265,7 +263,7 @@ $stmt->close();
     </div>
 </section>
     <section id="contact" class="contact" style="background-color: #eee;">
-      <div class="container" data-aos="fade-up">
+      <div class="container" >
 
         <div class="section-header">
           <h2>Liên hệ</h2>

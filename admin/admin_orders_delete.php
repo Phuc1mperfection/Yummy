@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	require_once("../components/connection.php");
-	$madh = $_GET["madh"];
+	$madh = $_GET["MaDonHang"];
 	$sql = "delete from donhang where MaDonHang = $madh";
 	$conn->query($sql) or die($conn->error);
 	if ($conn->error==""){

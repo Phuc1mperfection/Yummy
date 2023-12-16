@@ -120,9 +120,9 @@ body {
 
 .product-quantity {
     padding: 5px 5px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: #E0E0E0 1px solid;
-	width:23px;
+	width: 45px;
 	text-align: center;
 }
 

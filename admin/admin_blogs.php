@@ -21,38 +21,47 @@ if (isset($_SESSION['blogs_error']) && $_SESSION['blogs_error'] != "") {
   <title>Document</title>
 </head>
 <style>
-  table {
-    width: 80%;
-    margin: 20px auto;
-    font-size: 20px;
-    text-align: center;
-  }
+ table {
+            width: 80%;
+            margin: 20px auto;
+            font-size: 20px;
+            text-align: center;
+        }
 
-  th,
-  td {
-    border: 2px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
+        th,
+        td {
+            border: 2px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
 
-  th {
-    background-color: #af634c;
-    color: white;
-  }
+        th {
+            background-color: #af634c;
+            color: white;
+            font-size: 22px;
+        }
 
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
 
-  body {
-    background-color: #f2f2f2;
-  }
+        body {
+            background-color: #f2f2f2;
+        }
 
-  /* Để làm cho ảnh có góc bo tròn */
-  img {
-    border-radius: 5px;
-  }
+        /* Để làm cho ảnh có góc bo tròn */
+        img {
+            border-radius: 5px;
+        }
+
+        tr:hover {
+            background-color: grey;
+        }
+
+        tr {
+            transition: background-color 0.3s ease;
+        }
 </style>
 
 <body>
@@ -73,7 +82,6 @@ if (isset($_SESSION['blogs_error']) && $_SESSION['blogs_error'] != "") {
     ">Thêm một blog mới</a>
     </center>
     <center>
-      <font color=aqua><?php echo $_SESSION["blogs_error"]; ?></font>
     </center>
     <table width=85%>
       <tr>

@@ -1,9 +1,16 @@
 <?php
 require_once("../components/connection.php");
 
-// Check if the form is submitted
+if (isset($_GET['MaDonHang'])) {
+    $orderId = $_GET['orderId'];
+
+    $deleteSql = "DELETE FROM donhang WHERE MaDonHang = $orderId";
+    $conn->query($deleteSql);
+
+    header("Location: admin_orders.php");
+    exit();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the selected status and order ID from the form
     $selectedStatus = $_POST['trangThai'];
     $orderId = $_POST['orderId'];
 
@@ -104,7 +111,6 @@ $result = $conn->query($sql);
                 <th>Tổng tiền</th>
                 <th>Ngày đặt</th>
                 <th>Trạng thái</th>
-                <!-- Add the column header for the dropdown menu -->
                 <th>Action</th>
             </tr>
             <?php while ($row = $result->fetch_assoc()) : ?>
@@ -143,8 +149,13 @@ $result = $conn->query($sql);
                                 <option value="4" <?php echo ($row["TrangThai"] == 4) ? 'selected' : ''; ?>>Đơn hàng đã bị huỷ</option>
                             </select>
                             <input type="hidden" name="orderId" value="<?php echo $row['MaDonHang']; ?>">
-                            <input type="submit" value="Cập nhật">
-                        </form>
+                            <input type="submit" value="Cập nhật" class=" btn btn-primary">
+                    <td>
+                        <a href="admin_orders_delete.php?MaDonHang=<?php echo $row['MaDonHang']; ?>">
+                            <button class="btn btn-danger">Xóa</button>
+                        </a>
+                    </td>
+                    </form>
                     </td>
 
                 </tr>
@@ -152,7 +163,7 @@ $result = $conn->query($sql);
         </table>
     <?php
     } else {
-        echo "Bạn đã đặt đơn nào đâu !!!";
+        echo "Chưa ai đặt đơn ạ!!!";
     }
     $conn->close();
     ?>

@@ -103,7 +103,7 @@ $result = $conn->query("SELECT * FROM monan order by MaMonAn desc");
                         if ($row["TrangThai"] == 1) {
                             echo '<i class="fas fa-check" style="color: green;"></i>'; // FontAwesome check icon for "Còn"
                         } else {
-                            echo '<i class="fas fa-times" style="color: blue;"></i>'; // FontAwesome times icon for "Hết"
+                            echo '<i class="fas fa-times" style="color: red;"></i>'; // FontAwesome times icon for "Hết"
                         }
                     ?>
                 </td>
