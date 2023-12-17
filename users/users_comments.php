@@ -18,7 +18,8 @@ if ($result->num_rows > 0) {
 
         $sql = "INSERT INTO gopy (MaThanhVien, ChuDe, NoiDung) VALUES ('$mathanhvien', '$chude', '$noidung')";
         if ($conn->query($sql) === TRUE) {
-            $_SESSION['alert'] = "Form submitted successfully!";
+            $_SESSION['alert'] = "oke xonng rồi đấy!";
+
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -30,7 +31,7 @@ if ($result->num_rows > 0) {
 $conn->close();
 
 if (isset($_SESSION['alert'])) {
-    echo '<div class="alert alert-success">' . $_SESSION['alert'] . '</div>';
+    echo '<div class="alert alert-success" style = "margin-top:100px">' . $_SESSION['alert'] . '</div>';
     unset($_SESSION['alert']);
 }
 ?>
@@ -100,4 +101,5 @@ if (isset($_SESSION['alert'])) {
 </html>
 <?php
 include "../components/footer.php";
+unset($_SESSION["alert"]);
 ?>
